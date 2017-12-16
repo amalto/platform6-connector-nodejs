@@ -2,7 +2,7 @@ const SEPARATOR = '.'
 const HEADER_KEY_PREFIX = `b2${SEPARATOR}`
 const PLATFORM6_APP_KEY = `platform6${SEPARATOR}`
 const RECEIVER_ID_PREFIX = `cmb${SEPARATOR}`
-const SENDER_ID_PREFIX = `tmb${SEPARATOR}`
+const SENDER_ID_PREFIX = `tmp${SEPARATOR}`
 
 export const Constants = {
 	HEADER_KEY_PREFIX,
