@@ -1,6 +1,7 @@
 import { Address, Client as HazelcastClient, Config } from 'hazelcast-client'
 import { BusConnection, HeaderObject } from './busConnection'
 import { CommonMessage, Header, Attachment } from './messages/commonMessage'
+import HazelcastLogger from './loggers/hazelcastLogger'
 import { Constants } from './constants'
 import { CommonMessageSerializer } from './serializers/commonMessageSerializer'
 import { v4 as uuid } from 'uuid'
@@ -77,6 +78,7 @@ class Service {
 
 		config.serializationConfig.customSerializers.push(new CommonMessageSerializer)
 		config.networkConfig.addresses = [new Address(hostname, port)]
+		config.properties['hazelcast.logging'] = new HazelcastLogger
 
 		this.client = await HazelcastClient.newHazelcastClient(config)
 	}

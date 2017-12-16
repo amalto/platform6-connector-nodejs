@@ -28,6 +28,8 @@ The following scripts illustrate basic examples of how to develop a service usin
 ### Create a service
 ### Call a service
 ### Send a common message
+### Logging
+### Example
 
 ## Development
 

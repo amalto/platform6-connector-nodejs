@@ -1,13 +1,9 @@
 import { CommonMessage, Header, Attachment } from './messages/commonMessage'
-import { Constants } from './constants';
+import { Constants } from './constants'
+import { Logger } from './loggers/logger'
 import { v4 as uuid } from 'uuid'
 
-import * as Debug from 'debug'
-import * as memoize from 'mem'
-
-const debugRequest = Debug('platform6:client:bus-connection:request')
-const debugResponse = Debug('platform6:client:bus-connection:response')
-const debugError = Debug('platform6:client:bus-connection:error')
+const logger = new Logger('client', 'bus-connection')
 
 export type AttachmentDefinition = [Header[], string | object]
 export type AttachmentObject = Attachment | AttachmentDefinition
@@ -27,9 +23,9 @@ export function getHeaderKey(serviceId: string, key: string): string {
 export function displayCommonMessage(counterpartIdKey: string, commonMessage: CommonMessage): void {
 	const currentIdKey = commonMessage.replyTo
 	const counterpartId = counterpartIdKey.split(Constants.ID_SEPARATOR).slice(1).join(Constants.ID_SEPARATOR)
-	const logger = getLogger(currentIdKey === counterpartIdKey ? 'response' : 'request', counterpartIdKey)
+	const log = logger.get(currentIdKey === counterpartIdKey ? 'response' : 'request', counterpartIdKey)
 
-	logger(JSON.stringify(commonMessage, null, 2))
+	log(JSON.stringify(commonMessage, null, 2))
 }
 
 /**
@@ -47,7 +43,7 @@ export function getHeaderValue(commonMessage: CommonMessage, serviceId: string, 
 		.find(header => header.key === headerKey)
 
 	if (!header) {
-		debugError(`Header with key ${headerKey} is not found!`)
+		logger.get('error', `Header with key ${headerKey} is not found!`)
 
 		return null
 	}
@@ -77,10 +73,6 @@ function parse(value: string) {
 
 function stringify(value: string | object) {
 	return typeof value === 'string' ? value : JSON.stringify(value)
-}
-
-function generateLogger(...keywords: string[]) {
-	return Debug(['platform6:client:bus-connection'].concat(keywords).join(':'))
 }
 
 export class BusConnection {
@@ -120,5 +112,3 @@ export class BusConnection {
 		return new Attachment(payload)
 	}
 }
-
-const getLogger = memoize(generateLogger)
