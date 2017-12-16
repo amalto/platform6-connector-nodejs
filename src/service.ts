@@ -138,11 +138,11 @@ class Service {
 
 		if (!isSent) throw new Error(`Unable to send the common message with id ${commonMessage.id}!`)
 
-		BusConnection.displayCommonMessage(`Request to "${receiverIdKey}"`, commonMessage)
+		BusConnection.displayCommonMessage(receiverIdKey, commonMessage)
 
 		const response = await hazelcastClient.getQueue<CommonMessage>(this.idKey).take()
 
-		BusConnection.displayCommonMessage(`Response from "${receiverIdKey}"`, response)
+		BusConnection.displayCommonMessage(receiverIdKey, response)
 
 		if (response.id !== commonMessage.id)
 			throw new Error(`Common message response\'s id "${response.id}" is not the same as the common message request id "${commonMessage.id}"!`)

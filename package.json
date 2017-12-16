@@ -21,14 +21,18 @@
         "dev": "npm run build && node lib/bundle.js"
     },
     "dependencies": {
+        "debug": "^3.1.0",
         "express": "^4.16.2",
         "hazelcast-client": "^0.6.2",
+        "mem": "^3.0.0",
         "protobufjs": "^6.8.3",
         "uuid": "^3.1.0"
     },
     "devDependencies": {
         "@types/bluebird": "^3.5.18",
+        "@types/debug": "0.0.30",
         "@types/long": "^3.0.32",
+        "@types/mem": "^1.1.2",
         "@types/node": "^8.0.57",
         "@types/uuid": "^3.4.3",
         "ts-loader": "^3.2.0",
