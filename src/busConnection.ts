@@ -10,14 +10,20 @@ export type AttachmentObject = Attachment | AttachmentDefinition
 export type HeaderDefinition = [string, string | object]
 export type HeaderObject = Header | HeaderDefinition
 
-export function getHeaderKey(serviceId: string, key: string): string {
+/**
+ * Format a common message header's key.
+ *
+ * @param serviceId Receiver's identifier.
+ * @param key Header's key.
+ */
+export function formatHeaderKey(serviceId: string, key: string): string {
 	return Constants.HEADER_KEY_PREFIX + serviceId + Constants.ID_SEPARATOR + key
 }
 
 /**
  * Display in the console a common message.
  *
- * @param message Custom message preceding the common message.
+ * @param counterpartIdKey Receiver's id key.
  * @param commonMessage Common message to display.
  */
 export function displayCommonMessage(counterpartIdKey: string, commonMessage: CommonMessage): void {
@@ -36,14 +42,14 @@ export function displayCommonMessage(counterpartIdKey: string, commonMessage: Co
  * @param key Header's key.
  */
 export function getHeaderValue(commonMessage: CommonMessage, serviceId: string, key: string): string | object | null {
-	const headerKey = getHeaderKey(serviceId, key)
+	const headerKey = formatHeaderKey(serviceId, key)
 
 	const header = CommonMessage
 		.fromObject(commonMessage.toJSON()).headers
 		.find(header => header.key === headerKey)
 
 	if (!header) {
-		logger.get('error', `Header with key ${headerKey} is not found!`)
+		logger.get('error')(`Header with key ${headerKey} is not found!`)
 
 		return null
 	}
@@ -76,7 +82,7 @@ function stringify(value: string | object) {
 }
 
 export class BusConnection {
-	static getHeaderKey = getHeaderKey
+	static formatHeaderKey = formatHeaderKey
 	static getHeaderValue = getHeaderValue
 	static parseHeaders = parseHeaders
 	static displayCommonMessage = displayCommonMessage
@@ -92,13 +98,13 @@ export class BusConnection {
 
 	static createHeader(receiverId: string, key: string, value: string | object): Header {
 		const payload = {
-			key: receiverId ? getHeaderKey(receiverId, key) : key,
+			key: receiverId ? formatHeaderKey(receiverId, key) : key,
 			value: stringify(value)
 		}
 
 		const errorMessage = Header.verify(payload)
 
-		if (errorMessage) throw new Error(`Unable to create an header: ${errorMessage}`)
+		if (errorMessage) throw new Error(`Unable to create a header: ${errorMessage}`)
 
 		return new Header(payload)
 	}

@@ -18,7 +18,10 @@
     "private": true,
     "scripts": {
         "build": "rm -rf lib && webpack --config webpack.config.js",
-        "dev": "npm run build && node lib/bundle.js"
+		"dev": "npm run build && node lib/bundle.js",
+		"tests": "npm run ava --",
+		"tests:update": "npm run tests -- --update-snapshots",
+		"ava": "./node_modules/.bin/ava"
     },
     "dependencies": {
         "debug": "^3.1.0",
@@ -35,6 +38,7 @@
         "@types/mem": "^1.1.2",
         "@types/node": "^8.0.57",
         "@types/uuid": "^3.4.3",
+        "ava": "^0.24.0",
         "ts-loader": "^3.2.0",
         "typescript": "^2.6.2",
         "uglifyjs-webpack-plugin": "^1.1.3",
