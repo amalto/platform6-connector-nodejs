@@ -63,7 +63,7 @@ We use the library [debug](https://www.npmjs.com/package/debug) for debugging.
 
 To display the logs of Platform 6, set the `DEBUG` environment variable like this:
 ```console
-DEBUG=platform6:* node index.js
+$ DEBUG=platform6:* node index.js
 ```
 
 To filter the logs, please refer to the documentation of debug.
