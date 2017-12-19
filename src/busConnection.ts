@@ -13,7 +13,7 @@ export type HeaderObject = Header | HeaderDefinition
 /**
  * Format a common message header's key.
  *
- * @param serviceId Receiver's identifier.
+ * @param serviceId Receiver's id.
  * @param key Header's key.
  */
 export function formatHeaderKey(serviceId: string, key: string): string {
@@ -87,6 +87,13 @@ export class BusConnection {
 	static parseHeaders = parseHeaders
 	static displayCommonMessage = displayCommonMessage
 
+	/**
+	 * Create a common message.
+	 *
+	 * @param senderId Sender's id.
+	 * @param headers Array of headers (each header's key must be unique).
+	 * @param attachments Array of attachments.
+	 */
 	static createCommonMessage(senderId: string, headers: Header[], attachments: Attachment[]): CommonMessage {
 		const keys = headers.map(h => h.key)
 		if (keys.some((key, index) => keys.indexOf(key) !== index))
@@ -100,6 +107,13 @@ export class BusConnection {
 		return new CommonMessage(payload)
 	}
 
+	/**
+	 * Create a common message's header
+	 *
+	 * @param receiverId Receiver's id.
+	 * @param key The key of the header.
+	 * @param value The value of the header.
+	 */
 	static createHeader(receiverId: string, key: string, value: string | object): Header {
 		const payload = {
 			key: receiverId ? formatHeaderKey(receiverId, key) : key,
@@ -113,6 +127,12 @@ export class BusConnection {
 		return new Header(payload)
 	}
 
+	/**
+	 * Create a common message's attachment.
+	 *
+	 * @param headers Array of headers.
+	 * @param data The value of the attachment.
+	 */
 	static createAttachment(headers: Header[], data: string): Attachment {
 		const payload = { headers, data }
 		const errorMessage = Attachment.verify(payload)
