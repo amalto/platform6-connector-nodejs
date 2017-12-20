@@ -1,6 +1,6 @@
 {
     "name": "platform6-client",
-    "version": "0.0.1-alpha.1",
+    "version": "0.0.1-alpha.2",
     "description": "Platform 6 Node.js client",
     "main": "lib/service.js",
     "typings": "lib/service.d.ts",
@@ -15,7 +15,6 @@
             "email": "roxane.mace@amalto.com"
         }
     ],
-    "private": true,
     "scripts": {
         "build": "rm -rf lib && webpack --config webpack.config.js",
 		"dev": "npm run build && node lib/bundle.js",
