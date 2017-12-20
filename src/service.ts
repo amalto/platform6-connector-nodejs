@@ -97,7 +97,7 @@ class Service {
 				['node.id', uuid()],
 				['service.id', parameters.id],
 				['service.path', parameters.path],
-				['service.ctx', parameters.basePath],
+				['service.altContextUrl', parameters.basePath],
 				['service.version', typeof versions === 'string' ? versions : versions.server],
 				['service.ui.version', typeof versions === 'string' ? versions : versions.client],
 				['service.ui', parameters.ui],
