@@ -16,6 +16,7 @@
         }
     ],
     "scripts": {
+		"publish": "npm run build && npm publish --access public",
         "build": "rm -rf lib && webpack --config webpack.config.js",
         "dev": "npm run build && node lib/bundle.js",
         "tests": "npm run ava --",
