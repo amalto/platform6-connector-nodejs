@@ -1,6 +1,6 @@
 {
     "name": "@platform6/platform6-client",
-    "version": "0.0.1-alpha.2",
+    "version": "0.0.1-alpha.4",
     "description": "Platform 6 Node.js client",
     "main": "lib/service.js",
     "typings": "lib/service.d.ts",
@@ -17,10 +17,10 @@
     ],
     "scripts": {
         "build": "rm -rf lib && webpack --config webpack.config.js",
-		"dev": "npm run build && node lib/bundle.js",
-		"tests": "npm run ava --",
-		"tests:update": "npm run tests -- --update-snapshots",
-		"ava": "./node_modules/.bin/ava"
+        "dev": "npm run build && node lib/bundle.js",
+        "tests": "npm run ava --",
+        "tests:update": "npm run tests -- --update-snapshots",
+        "ava": "./node_modules/.bin/ava"
     },
     "dependencies": {
         "debug": "^3.1.0",
