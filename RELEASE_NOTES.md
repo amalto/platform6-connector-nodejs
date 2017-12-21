@@ -16,3 +16,7 @@ Nothing new.
 ## v.0.0.1-alpha.4
 ### Changed
 - change an intern header's name of the common message to deploy a service. Instead of `service.altContextUrl` use `service.ctx`.
+
+## v.0.0.1-alpha.5
+### Added
+- add a npm script to publish the module on npm.
