@@ -82,3 +82,7 @@ Follow the below steps to build and install Platform 6 Node.js client from its s
 - Install the dependencies using the command `npm install`
 - Compile the TypeScript using the command `npm run compile`
 - Link the package locally using the command `npm link`
+
+## Release notes
+
+Please refer to [RELEASE_NOTES](./RELEASE_NOTES.md) to see the descriptions of each release.
