@@ -7,15 +7,19 @@ __Platform 6__ is a platform to develop, package, distribute and run business ap
 
 ## Requirements
 
-- Platform 6 requires Node.js (>= 4).
-- This client works with b2box 5.13.7 and higher. The b2box is the term used to define the previous versions of Platform 6.
+Platform 6 depends on:
+
+- Node.js (version `>= 4`),
+- b2box (version `5.13.8` and higher)
+
+> _b2box_ is the term used to define the previous versions of _Platform 6_.
 
 ## Installing the client
 
-The following command install Platform 6 Node.js client as a Node.js dependency:
+The following command installs Platform 6 client as a Node.js dependency:
 
 ```console
-$ npm install platform6-client --save
+$ npm install --save platform6-client
 ```
 
 ## Using the client
@@ -23,6 +27,7 @@ $ npm install platform6-client --save
 A few examples to get you started.
 
 ### Create a service
+
 ```javascript
 import Service from 'platform6-client'
 
@@ -59,30 +64,20 @@ service.callService({
 
 ### Logging
 
-We use the library [debug](https://www.npmjs.com/package/debug) for debugging.
+We rely on the library [debug](https://github.com/visionmedia/debug) for debugging.
 
 To display the logs of Platform 6, set the `DEBUG` environment variable like this:
+
 ```console
 $ DEBUG=platform6:* node index.js
 ```
 
-To filter the logs, please refer to the documentation of debug.
+To filter the logs, please refer to [the documentation of debug](https://github.com/visionmedia/debug#debug).
 
-### Example
+### Demo project
 
 You can find an example of a service using this library [here](https://bitbucket.org/amalto/dev-service-typescript).
 
-## Development
-
-### Building and installing from sources
-
-Follow the below steps to build and install Platform 6 Node.js client from its source:
-
-- Clone the Bitbucket repository https://bitbucket.org/amalto/platform6-client-nodejs/overview
-- Install the dependencies using the command `npm install`
-- Compile the TypeScript using the command `npm run compile`
-- Link the package locally using the command `npm link`
-
 ## Release notes
 
-Please refer to [RELEASE_NOTES](./RELEASE_NOTES.md) to see the descriptions of each release.
+Please refer to [changelog](./CHANGELOG.md) to see the descriptions of each release.
