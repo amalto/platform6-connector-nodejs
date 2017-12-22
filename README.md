@@ -27,7 +27,6 @@ $ npm install --save platform6-client
 A few examples to get you started.
 
 ### Create a service
-
 ```javascript
 import Service from 'platform6-client'
 
@@ -52,13 +51,25 @@ const service = new Service({
 })
 ```
 
-### Call a service
+### Call another service
 ```javascript
 // Ask the service platform6.scripts to list its items
 service.callService({
 	username: 'admin@amalto.com',
 	receiverId: Service.Constants.SERVICE_SCRIPTS_ID,
 	action: 'list'
+})
+
+// Ask the service platform6.scripts to create a new script
+service.callService({
+	username: 'admin@amalto.com',
+	receiverId: Service.Constants.SERVICE_SCRIPTS_ID,
+	action: 'add',
+	headers: [
+		['scriptId', 'ondiflo.script1'],
+		['scriptDescription', '{EN: Scritpt 1 of Ondiflo}'],
+		['mainScriptContent', 'pipeline.variables().each() println "${it}"']
+	]
 })
 ```
 
