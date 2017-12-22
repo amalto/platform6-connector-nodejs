@@ -1,7 +1,8 @@
 {
     "name": "@platform6/platform6-client",
     "version": "0.0.1-alpha.6",
-    "description": "Platform 6 Node.js client",
+	"description": "Platform 6 Node.js client",
+	"license": "MIT",
     "main": "lib/service.js",
     "types": "lib/service.d.ts",
     "repository": {
