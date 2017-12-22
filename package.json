@@ -3,7 +3,7 @@
     "version": "0.0.1-alpha.5",
     "description": "Platform 6 Node.js client",
     "main": "lib/service.js",
-    "typings": "lib/service.d.ts",
+    "types": "lib/service.d.ts",
     "repository": {
         "type": "git",
         "url": "https://bitbucket.org/amalto/platform6-client-nodejs"
