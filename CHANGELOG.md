@@ -20,3 +20,7 @@ Nothing new.
 ## v.0.0.1-alpha.5
 ### Added
 - add a npm script to publish the module on npm.
+
+## v.0.0.1-alpha.6
+### Changed
+- update the READ.ME file.
