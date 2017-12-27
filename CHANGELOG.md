@@ -33,3 +33,8 @@ Nothing new.
 ## v0.0.1-alpha.8
 ### Changed
 - change the module's name into `@amalto/platform6-client`
+
+## v0.0.1-alpha.9
+### Changed
+- update the `package.json` properties
+

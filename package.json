@@ -1,8 +1,8 @@
 {
     "name": "@amalto/platform6-client",
-    "version": "0.0.1-alpha.8",
+    "version": "0.0.1-alpha.9",
 	"description": "Platform 6 Node.js client",
-	"homepage": "https://bitbucket.org/amalto/platform6-client-nodejs/overview",
+	"homepage": "https://bitbucket.org/amalto/platform6-client-nodejs#readme",
 	"bugs": "https://bitbucket.org/amalto/platform6-client-nodejs/issues",
 	"license": "MIT",
     "main": "lib/service.js",
