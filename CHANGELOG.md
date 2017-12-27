@@ -29,3 +29,7 @@ Nothing new.
 ### Added
 - add a MIT license.
 - add an example of calling a service in the README.md
+
+## v0.0.1-alpha.8
+### Changed
+- change the module's name into `@amalto/platform6-client`
