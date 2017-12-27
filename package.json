@@ -1,6 +1,6 @@
 {
-    "name": "@platform6/platform6-client",
     "version": "0.0.1-alpha.7",
+    "name": "@amalto/platform6-client",
 	"description": "Platform 6 Node.js client",
 	"license": "MIT",
     "main": "lib/service.js",
@@ -17,7 +17,6 @@
         }
     ],
     "scripts": {
-		"publish": "npm run build && npm publish --access public",
         "build": "rm -rf lib && webpack --config webpack.config.js",
         "dev": "npm run build && node lib/bundle.js",
         "tests": "npm run ava --",

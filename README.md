@@ -19,7 +19,7 @@ Platform 6 depends on:
 The following command installs Platform 6 client as a Node.js dependency:
 
 ```console
-$ npm install --save platform6-client
+$ npm install --save @amalto/platform6-client
 ```
 
 ## Using the client
@@ -28,7 +28,7 @@ A few examples to get you started.
 
 ### Create a service
 ```javascript
-import Service from 'platform6-client'
+import Service from '@amalto/platform6-client'
 
 const myServiceId = 'demo.typescript'
 
