@@ -9,7 +9,7 @@ __Platform 6__ is a platform to develop, package, distribute and run business ap
 
 Platform 6 depends on:
 
-- Node.js (version `>= 4`),
+- [Node.js](https://nodejs.org/en/) (version `>= 4`),
 - b2box (version `5.13.8` and higher)
 
 > _b2box_ is the term used to define the previous versions of _Platform 6_.
@@ -24,9 +24,27 @@ $ npm install --save @amalto/platform6-client
 
 ## Using the client
 
-A few examples to get you started.
+### Demo project
 
-### Create a service
+You can find an example of a service using this library [here](https://bitbucket.org/amalto/dev-service-typescript).
+
+### Logging
+
+We rely on the library [debug](https://github.com/visionmedia/debug) for debugging.
+
+To display the logs of Platform 6, set the `DEBUG` environment variable like this:
+
+```console
+$ DEBUG=platform6:* node index.js
+```
+
+To filter the logs, please refer to [the documentation of debug](https://github.com/visionmedia/debug#debug).
+
+### Recipes
+
+<details>
+	<summary><b>Create a service</b></summary>
+
 ```javascript
 import Service from '@amalto/platform6-client'
 
@@ -50,8 +68,11 @@ const service = new Service({
 	}
 })
 ```
+</details>
 
-### Call another service
+<details>
+	<summary><b>Call another service</b></summary>
+
 ```javascript
 // Ask the service platform6.scripts to list its items
 service.callService({
@@ -72,22 +93,7 @@ service.callService({
 	]
 })
 ```
-
-### Logging
-
-We rely on the library [debug](https://github.com/visionmedia/debug) for debugging.
-
-To display the logs of Platform 6, set the `DEBUG` environment variable like this:
-
-```console
-$ DEBUG=platform6:* node index.js
-```
-
-To filter the logs, please refer to [the documentation of debug](https://github.com/visionmedia/debug#debug).
-
-### Demo project
-
-You can find an example of a service using this library [here](https://bitbucket.org/amalto/dev-service-typescript).
+</details>
 
 ## Release notes
 
