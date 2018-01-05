@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Check for a valid increment
-if [[ ! " patch minor major " =~ " $1 " ]]; then
-	echo 'You must provide a valid increment as a first argument: patch, minor or major.'
+if [[ ! " prerelease patch minor major " =~ " $1 " ]]; then
+	echo 'You must provide a valid increment as a first argument: prerelease, patch, minor or major.'
 	exit 1
 fi
 
