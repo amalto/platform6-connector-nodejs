@@ -20,6 +20,7 @@
         }
     ],
     "scripts": {
+		"release": "./scripts/release.sh",
         "build": "npm run webpack --",
         "tests": "npm run ava --",
         "tests:update": "npm run tests -- --update-snapshots",
