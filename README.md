@@ -42,8 +42,7 @@ To filter the logs, please refer to [the documentation of debug](https://github.
 
 ### Recipes
 
-<details>
-	<summary><b>Create a service</b></summary>
+#### Create a service
 
 ```javascript
 import Service from '@amalto/platform6-client'
@@ -68,10 +67,8 @@ const service = new Service({
 	}
 })
 ```
-</details>
 
-<details>
-	<summary><b>Call another service</b></summary>
+#### Call another service
 
 ```javascript
 // Ask the service platform6.scripts to list its items
@@ -93,7 +90,6 @@ service.callService({
 	]
 })
 ```
-</details>
 
 ## Release notes
 
