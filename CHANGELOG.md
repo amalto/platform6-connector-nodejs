@@ -46,7 +46,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.0.1-alpha.2] - 2017-12-20
 Nothing new.
 
-## [0.0.1-alpha.1] - 2017-12-14
+## 0.0.1-alpha.1 - 2017-12-14
 ### Added
 - Expose methods to create a common message.
 - Expose methods to deploy and call a service.
