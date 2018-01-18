@@ -2,6 +2,7 @@
 
 ## Table of contents:
 - [Service](#service)
+- [CommonMessage](#servicecommonmessage)
 - [Service.deployed](#servicedeployed)
 - [Service.callService](#servicecallservice)
 - [Service.BusConnection.getHeaderValue](#servicebusconnectiongetheadervalue)
@@ -14,7 +15,7 @@ Platform 6 service.
 `new Service(parameters: DeployParameters): Service`
 
 __Argument:__
-```javascript
+```typescript
 interface DeployParameters {
 	/** Email address of the caller. */
 	username: string
@@ -47,7 +48,7 @@ interface Versions {
 ```
 
 __Example:__
-```javascript
+```typescript
 const myServiceId = 'demo.typescript'
 
 // Create a new service named 'demo.typescript'
@@ -69,6 +70,32 @@ new Service({
 })
 ```
 
+## CommonMessage
+
+The data exchanged between services are called __common messages__. A common message is a generic message with headers and attachments.
+
+It consists of:
+
+```typescript
+interface CommonMessage {
+	/* Common message’s unique identifier */
+	id: string,
+
+	/* Sender’s identifier */
+	replyTo: string,
+
+	/* Common message’s content (advised if value is lower than 32 kb) */
+	headers: Header[],
+
+	/* Common message’s additional content (advised if value is higher than 32 kb) */
+	attachments: Attachment[]
+}
+
+interface Header { key: string, value: string }
+
+interface Attachment { headers: Header[], bytes: string }
+```
+
 ## Service.deployed
 
 Platform 6 service instance.
@@ -76,7 +103,7 @@ Platform 6 service instance.
 __Type__: `Promise<void>`
 
 __Example__:
-```javascript
+```typescript
 const service = new Service({ /* ... */ })
 
 service.deployed.catch(console.error)
@@ -89,7 +116,7 @@ Send a request to another service.
 `callService(parameters: CallServiceParameters): Promise<CommonMessage>`
 
 __Argument:__
-```javascript
+```typescript
 interface CallServiceParameters {
 	/** Email address of the caller. */
 	username: string
@@ -109,7 +136,7 @@ interface CallServiceParameters {
 ```
 
 __Example__:
-```javascript
+```typescript
 const service = new Service({ /* ... */ })
 
 // Ask the service platform6.scripts to create a new script
@@ -132,7 +159,7 @@ Get the value of a common message's header by key.
 `getHeaderValue(commonMessage: CommonMessage, serviceId: string, key: string): string | object | null`
 
 __Example__:
-```javascript
+```typescript
 const service = new Service({ /* ... */ })
 
 // Ask the service platform6.scripts to list its items
@@ -143,7 +170,7 @@ const scriptsResponse = await service.callService({
 })
 
 // Get the value from the service Platform 6 Scripts's response
-const items = Service.BusConnection.getHeaderValue(scriptsResponse, Service.Constants.SERVICE_SCRIPTS_ID, 'scriptIds'
+const items = Service.BusConnection.getHeaderValue(scriptsResponse, Service.Constants.SERVICE_SCRIPTS_ID, 'scriptIds')
 ```
 
 ## Service.Constants
