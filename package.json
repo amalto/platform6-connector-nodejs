@@ -21,7 +21,7 @@
     ],
     "scripts": {
         "release": "./scripts/release.sh",
-        "build": "npm run webpack --",
+		"build": "npm run webpack --",
         "tests": "npm run ava --",
         "tests:update": "npm run tests -- --update-snapshots",
         "webpack": "./node_modules/.bin/webpack",

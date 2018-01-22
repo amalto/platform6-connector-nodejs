@@ -1,6 +1,6 @@
 import { Address, Client as HazelcastClient, Config } from 'hazelcast-client'
 import { BusConnection, HeaderObject } from './busConnection'
-import { Permissions } from './permissions'
+import { PermissionsManager } from './permissionsManager'
 import { CommonMessage, Header, Attachment } from './messages/commonMessage'
 import HazelcastLogger from './loggers/hazelcastLogger'
 import { Constants } from './constants'
@@ -58,7 +58,8 @@ declare namespace Service {
 /** Platform 6 service. */
 class Service {
 	static BusConnection = BusConnection
-	static Permissions = Permissions
+	static PermissionsManager = PermissionsManager
+
 	static Constants = Constants
 
 	private idKey: string
