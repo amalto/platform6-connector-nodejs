@@ -4,43 +4,57 @@ const test = require('ava')
 const PermissionsManager = Service.PermissionsManager
 
 const userPermissions = {
-	"*": { "workflow": { "role": ["Invoice Payers"] }, "home": { "*": {} } },
-	"Roxane": { "orgs": { "read": {} }, "reports": { "*": {} } }
+	"workflow": { "role": ["Invoice Payers"] },
+	"home": { "*": {} },
+	"reports": { "read": {} }
 }
 
-// test('The user tests a permission null', t => {
-// 	t.is(PermissionsManager.hasPermission('Roxane', null, userPermissions), false)
-// })
+const requiredPermission = { "home": { "*": {} } }
+const requiredPermissions1 = {
+	"home": { "*": {} },
+	"workflow": { "role": ["Invoice Payers"] },
+}
+const requiredPermissions2 = {
+	"stripe": { "read": {} },
+	"messages": { "*": {} }
+}
+const requiredPermissions3 = {
+	"home": { "*": {} },
+	"stripe": { "read": {} },
+}
 
-// test('The user has the required permission', t => {
-// 	t.is(PermissionsManager.hasPermission('Roxane', { "orgs": { "read": {} } }, userPermissions), true)
-// })
-
-// test('The user does not have the required permission', t => {
-// 	t.is(PermissionsManager.hasPermission('Roxane', { "scripts": { "read": {} } }, userPermissions), false)
-// })
-
-// test('The user tests a set of permissions null', t => {
-// 	t.is(PermissionsManager.hasAnyPermission('Roxane', null, userPermissions), false)
-// })
-
-// test('The user has at least one of the required permissions #1', t => {
-// 	t.is(PermissionsManager.hasAnyPermission('Roxane', { "orgs": { "read": {} }, "scripts": { "*": {} } }, userPermissions), true)
-// })
-
-// test('The user has at least one of the required permissions #2', t => {
-// 	t.is(PermissionsManager.hasAnyPermission('Roxane', { "scripts": { "*": {} }, "orgs": { "read": {} } }, userPermissions), true)
-// })
-
-// test('The user has all the required permissions', t => {
-// 	t.is(PermissionsManager.hasAnyPermission('Roxane', { "orgs": { "read": {} }, "reports": { "*": {} } }, userPermissions), true)
-// })
-
-test('The user has neither required permission', t => {
-	t.is(PermissionsManager.hasAnyPermission('*', { "scripts": { "read": {} }, "stripe": { "read": {} } }, userPermissions), false)
+test('The required permissions are null', t => {
+	t.is(PermissionsManager.hasPermissions(null, userPermissions), false)
 })
 
-// test('The user has an admin permission for a service', t => {
-// 	t.is(PermissionsManager.hasPermission('Roxane', { "reports": { "read": {} } }, userPermissions), true)
-// })
+test('The user\'s permissions are null', t => {
+	t.is(PermissionsManager.hasPermissions(requiredPermissions1, null), false)
+})
 
+test('The user has the required permission', t => {
+	t.is(PermissionsManager.hasPermissions(requiredPermissions1, userPermissions), true)
+})
+
+test('The user has the required permissions', t => {
+	t.is(PermissionsManager.hasPermissions(requiredPermissions1, userPermissions), true)
+})
+
+test('The user does not have the required permission', t => {
+	t.is(PermissionsManager.hasPermissions({ "scripts": { "read": {} } }, userPermissions), false)
+})
+
+test('The user does not have the required permissions', t => {
+	t.is(PermissionsManager.hasPermissions(requiredPermissions2, userPermissions), false)
+})
+
+test('The user has an admin permission for a service', t => {
+	t.is(PermissionsManager.hasPermissions({ "home": { "read": {} } }, userPermissions), true)
+})
+
+test('The user has at least one of the required permissions', t => {
+	t.is(PermissionsManager.hasAnyPermissions(requiredPermissions3, userPermissions), true)
+})
+
+test('The user has not at least one of the required permissions', t => {
+	t.is(PermissionsManager.hasAnyPermissions(requiredPermissions2, userPermissions), false)
+})
