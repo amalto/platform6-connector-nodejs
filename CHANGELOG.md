@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Add the [`API.md`](./API.md) file.
+### Changed
+- Migrate the repository from Bitbucket to Github.
 
 ## [0.0.1-alpha.10] - 2018-01-05
 ### Added
