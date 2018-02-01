@@ -2,15 +2,17 @@
 
 > :construction: This project is currently in development. :construction:
 
+:warning: This library is only useful for the users of [Platform 6](https://github.com/amalto/platform6-wiki)!
 
-[__Platform 6__](https://github.com/amalto/platform6-wiki) is a platform to develop, package, distribute and run business applications involving _Business-to-Business_ transactions with automated processes and user actions.
+This repository is a [Platform 6 client](https://github.com/amalto/platform6-wiki/blob/master/create-service.md#platform-6-clients) aiming to help the development a [service](https://github.com/amalto/platform6-wiki/blob/master/create-service.md#platform-6-clients) in JavaScript.
+It exposes, among others, methods to facilitate the communication with a Platform 6 instance.
 
 ## Requirements
 
 Platform 6 depends on:
 
 - [Node.js](https://nodejs.org/en/) (version `>= 4`),
-- b2box (version `5.13.8` and higher)
+- [_b2box_](https://github.com/amalto/platform6-wiki/blob/master/glossary.md#b2box) (version `5.13.8` and higher)
 
 > _b2box_ is the term used to define the previous versions of _Platform 6_.
 
@@ -26,7 +28,7 @@ $ npm install --save @amalto/platform6-client
 
 ### Demo project
 
-You can find an example of a service using this library [here](https://bitbucket.org/amalto/dev-service-typescript).
+You can find an example of a service using this library [here](https://github.com/amalto/platform6-service-typescript).
 
 ### Logging
 
@@ -47,3 +49,7 @@ You will find the documentation of the methods exposed in the section [API](./AP
 ## Release notes
 
 Please refer to [changelog](./CHANGELOG.md) to see the descriptions of each release.
+
+## License
+
+MIT © [Amalto Technologies](https://www.amalto.com/)
