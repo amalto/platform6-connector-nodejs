@@ -3,7 +3,7 @@
 > :construction: This project is currently in development. :construction:
 
 
-__Platform 6__ is a platform to develop, package, distribute and run business applications involving _Business-to-Business_ transactions with automated processes and user actions.
+[__Platform 6__](https://github.com/amalto/platform6-wiki) is a platform to develop, package, distribute and run business applications involving _Business-to-Business_ transactions with automated processes and user actions.
 
 ## Requirements
 
@@ -40,56 +40,9 @@ $ DEBUG=platform6:* node index.js
 
 To filter the logs, please refer to [the documentation of debug](https://github.com/visionmedia/debug#debug).
 
-### Recipes
+### API
 
-#### Create a service
-
-```javascript
-import Service from '@amalto/platform6-client'
-
-const myServiceId = 'demo.typescript'
-
-// Create a new service named 'demo.typescript'
-const service = new Service({
-	username: 'admin@amalto.com',
-	id: myServiceId,
-	path: `/apis/v.1.0.0/${myServiceId}`,
-	basePath: 'http://localhost:8000',
-	versions: '1.0.0',
-	ui: {
-		visible: true,
-		iconName: 'fa-code',
-		weight: 30,
-		label: {
-			'en-US': 'TypeScript',
-			'fr-FR': 'TypeScript'
-		}
-	}
-})
-```
-
-#### Call another service
-
-```javascript
-// Ask the service platform6.scripts to list its items
-service.callService({
-	username: 'admin@amalto.com',
-	receiverId: Service.Constants.SERVICE_SCRIPTS_ID,
-	action: 'list'
-})
-
-// Ask the service platform6.scripts to create a new script
-service.callService({
-	username: 'admin@amalto.com',
-	receiverId: Service.Constants.SERVICE_SCRIPTS_ID,
-	action: 'add',
-	headers: [
-		['scriptId', 'ondiflo.script1'],
-		['scriptDescription', '{EN: Scritpt 1 of Ondiflo}'],
-		['mainScriptContent', 'pipeline.variables().each() println "${it}"']
-	]
-})
-```
+You will find the documentation of the methods exposed in the section [API](./API.md).
 
 ## Release notes
 
