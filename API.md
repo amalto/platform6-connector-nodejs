@@ -27,14 +27,14 @@ interface DeployParameters {
 	path: string
 
 	/** Base path of the endpoint's URL to get the service's client script.
-	 * Windows: `IP address`
+	 * Windows: `${YOUR_ID_ADDRESS}:8000`
 	 * Mac: `http://docker.for.mac.localhost:8000` */
 	basePath: string
 
 	/** Semver version of all the service's components. */
 	versions: Versions | string
 
-	/** Properties of the service's entry menu. */
+	/** Properties of the service's menu entry. */
 	ui: UserInterfaceProperties
 }
 
@@ -48,14 +48,14 @@ interface Versions {
 ```
 
 __Example:__
-```typescript
+```javascript
 const myServiceId = 'demo.typescript'
 
 // Create a new service named 'demo.typescript'
 new Service({
 	username: 'admin@amalto.com',
 	id: myServiceId,
-	path: baseUrl + myServiceId,
+	path: `/api/${myServiceId}`,
 	basePath: 'http://docker.for.mac.localhost:8000',
 	versions: '1.0.0',
 	ui: {
@@ -103,7 +103,7 @@ Platform 6 service instance.
 __Type__: `Promise<void>`
 
 __Example__:
-```typescript
+```javascript
 const service = new Service({ /* ... */ })
 
 service.deployed.catch(console.error)
@@ -136,7 +136,7 @@ interface CallServiceParameters {
 ```
 
 __Example__:
-```typescript
+```javascript
 const service = new Service({ /* ... */ })
 
 // Ask the service platform6.scripts to create a new script
@@ -159,7 +159,7 @@ Get the value of a common message's header by key.
 `getHeaderValue(commonMessage: CommonMessage, serviceId: string, key: string): string | object | null`
 
 __Example__:
-```typescript
+```javascript
 const service = new Service({ /* ... */ })
 
 // Ask the service platform6.scripts to list its items
