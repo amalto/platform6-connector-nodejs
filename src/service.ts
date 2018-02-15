@@ -1,11 +1,12 @@
 import { Address, Client as HazelcastClient, Config } from 'hazelcast-client'
 import { BusConnection, HeaderObject } from './busConnection'
-import { PermissionsManager } from './permissionsManager'
 import { CommonMessage, Header, Attachment } from './messages/commonMessage'
 import HazelcastLogger from './loggers/hazelcastLogger'
 import { Constants } from './constants'
 import { CommonMessageSerializer } from './serializers/commonMessageSerializer'
 import { v4 as uuid } from 'uuid'
+
+import * as PermissionsManager from './permissionsManager'
 
 declare namespace Service {
 	interface UserInterfaceProperties {
@@ -59,7 +60,6 @@ declare namespace Service {
 class Service {
 	static BusConnection = BusConnection
 	static PermissionsManager = PermissionsManager
-
 	static Constants = Constants
 
 	private idKey: string

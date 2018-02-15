@@ -21,11 +21,13 @@
     ],
     "scripts": {
         "release": "./scripts/release.sh",
-		"build": "npm run webpack --",
+        "build": "npm run webpack --",
+        "build:watch": "npm run build -- --watch",
         "tests": "npm run ava --",
         "tests:update": "npm run tests -- --update-snapshots",
         "webpack": "./node_modules/.bin/webpack",
-        "ava": "./node_modules/.bin/ava"
+        "ava": "./node_modules/.bin/ava",
+        "ava:watch": "npm run ava -- --watch"
     },
     "dependencies": {
         "debug": "^3.1.0",
@@ -51,5 +53,5 @@
     },
     "engines": {
         "node": ">=4"
-    }
+	}
 }
