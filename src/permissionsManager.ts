@@ -14,6 +14,12 @@ export interface InstancePermissions {
 	[instance: string]: Permissions
 }
 
+export interface FormattedPermission {
+	feature: string
+	action: string
+	values?: string[]
+}
+
 /**
  * Compare the values of two permissions
  *
@@ -97,21 +103,42 @@ function getMergedPermissions(instance: string, userInstancesPermissions: Instan
 }
 
 /**
+ * Parse the formatted permissions
+ *
+ * @param formattedPermissions the formatted permissions
+ */
+export function parsePermissions(formattedPermissions: FormattedPermission[]): Permissions {
+	if (!formattedPermissions || typeof formattedPermissions !== 'object') return null
+
+	const permissions = <Permissions>{}
+
+	formattedPermissions.forEach(f => {
+		const { values } = f
+		permissions[f.feature] = { [f.action]: !values ? {} : values }
+	})
+
+	return permissions
+}
+
+/**
  * Check if the user has the required permissions on a specific instance
  *
  * @param instance the name of the user's Platform 6 instance
  * @param userInstancesPermissions the user's permissions on the instance
- * @param requiredPermissions the required permissions
+ * @param requiredPermissions the required formatted permissions
  */
-export function hasPermissions(instance: string, userInstancesPermissions: InstancePermissions, requiredPermissions: Permissions): boolean {
-	const mergedPermissions = getMergedPermissions(instance, userInstancesPermissions, requiredPermissions)
+export function hasPermissions(
+	instance: string, userInstancesPermissions: InstancePermissions, requiredPermissions: FormattedPermission[]
+): boolean {
+	const parsedRequiredPermissions = parsePermissions(requiredPermissions)
+	const mergedPermissions = getMergedPermissions(instance, userInstancesPermissions, parsedRequiredPermissions)
 
-	if (requiredPermissions == null || mergedPermissions == null) return false
+	if (parsedRequiredPermissions == null || mergedPermissions == null) return false
 
 	return checkIfUserIsSuperUser(mergedPermissions) ||
 		Object
-			.keys(requiredPermissions)
-			.every(feature => feature in mergedPermissions && compareValues(requiredPermissions[feature], mergedPermissions[feature]))
+			.keys(parsedRequiredPermissions)
+			.every(feature => feature in mergedPermissions && compareValues(parsedRequiredPermissions[feature], mergedPermissions[feature]))
 }
 
 /**
@@ -119,17 +146,20 @@ export function hasPermissions(instance: string, userInstancesPermissions: Insta
  *
  * @param instance the name of the user's Platform 6 instance
  * @param userInstancesPermissions the user's permissions on the instance
- * @param requiredPermissions the required permissions
+ * @param requiredPermissions the required formatted permissions
  */
-export function hasAnyPermissions(instance: string, userInstancesPermissions: InstancePermissions, requiredPermissions: Permissions): boolean {
-	const mergedPermissions = getMergedPermissions(instance, userInstancesPermissions, requiredPermissions)
+export function hasAnyPermissions(
+	instance: string, userInstancesPermissions: InstancePermissions, requiredPermissions: FormattedPermission[]
+): boolean {
+	const parsedRequiredPermissions = parsePermissions(requiredPermissions)
+	const mergedPermissions = getMergedPermissions(instance, userInstancesPermissions, parsedRequiredPermissions)
 
 	if (requiredPermissions == null || mergedPermissions == null) return false
 
 	return checkIfUserIsSuperUser(mergedPermissions) ||
 		Object
-			.keys(requiredPermissions)
-			.some(feature => feature in mergedPermissions && compareValues(requiredPermissions[feature], mergedPermissions[feature]))
+		.keys(parsedRequiredPermissions)
+		.some(feature => feature in mergedPermissions && compareValues(parsedRequiredPermissions[feature], mergedPermissions[feature]))
 }
 
 /**
@@ -137,7 +167,7 @@ export function hasAnyPermissions(instance: string, userInstancesPermissions: In
  *
  * @param request the request containing the authentication token
  */
-export function getUserPermissions(request: any): Promise<Permissions> {
+export function getUserPermissions(request: any): Promise<InstancePermissions> {
 	// Get the authorization token to inject it in the following request
 	const authorization = request.get('Authorization')
 
@@ -147,7 +177,7 @@ export function getUserPermissions(request: any): Promise<Permissions> {
 		headers: { 'Authorization': authorization }
 	}
 
-	return new Promise<Permissions>((resolve, reject) => https
+	return new Promise<InstancePermissions>((resolve, reject) => https
 		.get(options, response => {
 			let data = ''
 
@@ -157,3 +187,12 @@ export function getUserPermissions(request: any): Promise<Permissions> {
 		})
 		.on('error', reject))
 }
+
+
+/**
+ * [{ feature: 'feature 1', action: 'action 1', value: 'value 1'}, { feature: 'feature 2', action: 'action 2', value: 'value 2'}]
+ *
+ * {}
+ * {[feature]: { [action]: value }}
+ *
+ */
