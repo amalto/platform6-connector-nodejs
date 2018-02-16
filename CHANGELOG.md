@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Add a link to the [`API.md`](./API.md) file on the `README.md`.
+- Add a license MIT on the `README.md`.
+- Expose methods to check that the user has the right permissions ([#1](https://github.com/amalto/platform6-client-nodejs/issues/1)).
+### Changed
+- Update the links to other repositories on the `README.md`.
 
 ## [0.0.1-alpha.11] - 2018-01-23
 ### Added
