@@ -2,6 +2,12 @@ import * as https from 'https'
 import { Constants } from './constants'
 import { userInfo } from 'os';
 
+export interface FormattedPermission {
+	feature: string
+	action: string
+	values?: string[]
+}
+
 export type PermissionValue = string[] | {}
 
 export interface Permissions {
@@ -12,12 +18,6 @@ export interface Permissions {
 
 export interface InstancePermissions {
 	[instance: string]: Permissions
-}
-
-export interface FormattedPermission {
-	feature: string
-	action: string
-	values?: string[]
 }
 
 /**
@@ -64,45 +64,6 @@ export function getPermissionsFromInstance(instance: string, instancePermissions
 }
 
 /**
- * Merge the user's permissions on his instance and on the super instance
- * Note: if a permission exists on the super instance and not on the user's instance, add it in the response; if not ignore
- *
- * @param userPermissions the user's permissions on the user's instance
- * @param adminPermissions the user's permissions on the super instance
- */
-export function mergePermissions(userPermissions: Permissions, adminPermissions: Permissions): Permissions {
-	if (checkIfUserIsSuperUser(adminPermissions) || userPermissions === null) return adminPermissions
-
-	const newUserPermissions = { ... userPermissions }
-
-	if (adminPermissions !== null) {
-		Object
-			.keys(adminPermissions)
-			.forEach(feature => {
-				if (!newUserPermissions[feature]) newUserPermissions[feature] = adminPermissions[feature]
-			})
-	}
-
-	return newUserPermissions
-}
-
-/**
- * Get the merged permissions
- *
- * @param instance the name of the user's Platform 6 instance
- * @param userInstancesPermissions the user's permissions on the instance
- * @param requiredPermissions the required permissions
- */
-function getMergedPermissions(instance: string, userInstancesPermissions: InstancePermissions, requiredPermissions: Permissions): Permissions {
-	if (instance === '' || instance === null) throw new Error('Platform 6 instance cannot be empty or null!')
-
-	return mergePermissions(
-		getPermissionsFromInstance(instance, userInstancesPermissions),
-		getPermissionsFromInstance(Constants.PERMISSION_ADMIN, userInstancesPermissions)
-	)
-}
-
-/**
  * Parse the formatted permissions
  *
  * @param formattedPermissions the formatted permissions
@@ -130,15 +91,17 @@ export function parsePermissions(formattedPermissions: FormattedPermission[]): P
 export function hasPermissions(
 	instance: string, userInstancesPermissions: InstancePermissions, requiredPermissions: FormattedPermission[]
 ): boolean {
+	if (instance === '' || instance === null) throw new Error('Platform 6 instance cannot be empty or null!')
+
 	const parsedRequiredPermissions = parsePermissions(requiredPermissions)
-	const mergedPermissions = getMergedPermissions(instance, userInstancesPermissions, parsedRequiredPermissions)
+	const userPermissions = getPermissionsFromInstance(instance, userInstancesPermissions)
 
-	if (parsedRequiredPermissions == null || mergedPermissions == null) return false
+	if (parsedRequiredPermissions == null || userPermissions == null) return false
 
-	return checkIfUserIsSuperUser(mergedPermissions) ||
+	return checkIfUserIsSuperUser(userPermissions) ||
 		Object
 			.keys(parsedRequiredPermissions)
-			.every(feature => feature in mergedPermissions && compareValues(parsedRequiredPermissions[feature], mergedPermissions[feature]))
+			.every(feature => feature in userPermissions && compareValues(parsedRequiredPermissions[feature], userPermissions[feature]))
 }
 
 /**
@@ -151,15 +114,17 @@ export function hasPermissions(
 export function hasAnyPermissions(
 	instance: string, userInstancesPermissions: InstancePermissions, requiredPermissions: FormattedPermission[]
 ): boolean {
+	if (instance === '' || instance === null) throw new Error('Platform 6 instance cannot be empty or null!')
+
 	const parsedRequiredPermissions = parsePermissions(requiredPermissions)
-	const mergedPermissions = getMergedPermissions(instance, userInstancesPermissions, parsedRequiredPermissions)
+	const userPermissions = getPermissionsFromInstance(instance, userInstancesPermissions)
 
-	if (requiredPermissions == null || mergedPermissions == null) return false
+	if (requiredPermissions == null || userPermissions == null) return false
 
-	return checkIfUserIsSuperUser(mergedPermissions) ||
+	return checkIfUserIsSuperUser(userPermissions) ||
 		Object
 		.keys(parsedRequiredPermissions)
-		.some(feature => feature in mergedPermissions && compareValues(parsedRequiredPermissions[feature], mergedPermissions[feature]))
+		.some(feature => feature in userPermissions && compareValues(parsedRequiredPermissions[feature], userPermissions[feature]))
 }
 
 /**

@@ -39,23 +39,6 @@ test('Get the permissions from a set of null instance permission', t => {
 })
 
 
-test('Merge two sets of permissions: user\'s permissions are null', t => {
-	t.is(PermissionsManager.mergePermissions(null, Constants.PERMISSIONS_SET1), Constants.PERMISSIONS_SET1)
-})
-
-test('Merge two sets of permissions: admin\'s permissions are null', t => {
-	t.deepEqual(PermissionsManager.mergePermissions(Constants.PERMISSIONS_SET1, null), Constants.PERMISSIONS_SET1)
-})
-
-test('Merge two sets of permissions: one is super admin', t => {
-	t.is(PermissionsManager.mergePermissions(Constants.PERMISSIONS_SET1, Constants.PERMISSIONS_SET7), Constants.PERMISSIONS_SET7)
-})
-
-test('Merge two sets of permissions', t => {
-	t.deepEqual(PermissionsManager.mergePermissions(Constants.PERMISSIONS_SET6, Constants.PERMISSIONS_SET8), Constants.PERMISSIONS_SET9)
-})
-
-
 test('Parse permissions: formatted permissions are invalid', t => {
 	t.is(PermissionsManager.parsePermissions(null), null)
 	t.is(PermissionsManager.parsePermissions('toto'), null)
@@ -125,13 +108,13 @@ test('Check the permissions: the user does\'nt have all the required permissions
 })
 
 test('Check the permissions: the user has an admin permission for a service', t => {
-	t.is(PermissionsManager.hasPermissions(Constants.INSTANCE_ROXANE, Constants.INSTANCE_SET4, Constants.FORMATTED_SET6), true)
-	t.is(PermissionsManager.hasAnyPermissions(Constants.INSTANCE_ROXANE, Constants.INSTANCE_SET4, Constants.FORMATTED_SET6), true)
+	t.is(PermissionsManager.hasPermissions(Constants.INSTANCE_ROXANE, Constants.INSTANCE_SET3, Constants.FORMATTED_SET6), true)
+	t.is(PermissionsManager.hasAnyPermissions(Constants.INSTANCE_ROXANE, Constants.INSTANCE_SET3, Constants.FORMATTED_SET6), true)
 })
 
 test('Check the permissions: the user is assigned on several instances and has the permissions', t => {
-	t.is(PermissionsManager.hasPermissions(Constants.INSTANCE_SUPER, Constants.INSTANCE_SET3, Constants.FORMATTED_SET6), true)
-	t.is(PermissionsManager.hasAnyPermissions(Constants.INSTANCE_SUPER, Constants.INSTANCE_SET3, Constants.FORMATTED_SET6), true)
+	t.is(PermissionsManager.hasPermissions(Constants.INSTANCE_DEV, Constants.INSTANCE_SET2, Constants.FORMATTED_SET6), true)
+	t.is(PermissionsManager.hasAnyPermissions(Constants.INSTANCE_DEV, Constants.INSTANCE_SET2, Constants.FORMATTED_SET6), true)
 })
 
 test('Check the permissions: the user is assigned on several instances and has not the permissions', t => {
@@ -144,17 +127,7 @@ test('Check the permissions: the user is assigned to several instances', t => {
 	t.is(PermissionsManager.hasAnyPermissions(Constants.INSTANCE_DEV, Constants.INSTANCE_SET2, Constants.FORMATTED_SET6), true)
 })
 
-test('Check the permissions: the user is a super user on this instance', t => {
-	t.is(PermissionsManager.hasPermissions(Constants.INSTANCE_ROXANE, Constants.INSTANCE_SET5, Constants.FORMATTED_SET8), true)
-	t.is(PermissionsManager.hasAnyPermissions(Constants.INSTANCE_ROXANE, Constants.INSTANCE_SET5, Constants.FORMATTED_SET8), true)
-})
-
-test('Check the permissions: the user has permissions on the super instance', t => {
-	t.is(PermissionsManager.hasPermissions(Constants.INSTANCE_ROXANE, Constants.INSTANCE_SET5, Constants.FORMATTED_SET8), true)
-	t.is(PermissionsManager.hasAnyPermissions(Constants.INSTANCE_ROXANE, Constants.INSTANCE_SET5, Constants.FORMATTED_SET8), true)
-})
-
-test('Check the permissions: the user is a super user on the super instance', t => {
-	t.is(PermissionsManager.hasPermissions(Constants.INSTANCE_ROXANE, Constants.INSTANCE_SET6, Constants.FORMATTED_SET5), true)
-	t.is(PermissionsManager.hasAnyPermissions(Constants.INSTANCE_ROXANE, Constants.INSTANCE_SET6, Constants.FORMATTED_SET5), true)
+test('Check the permissions: the user is a super user on his instance', t => {
+	t.is(PermissionsManager.hasPermissions(Constants.INSTANCE_ROXANE, Constants.INSTANCE_SET4, Constants.FORMATTED_SET8), true)
+	t.is(PermissionsManager.hasAnyPermissions(Constants.INSTANCE_ROXANE, Constants.INSTANCE_SET4, Constants.FORMATTED_SET8), true)
 })
