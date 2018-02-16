@@ -44,7 +44,7 @@ To filter the logs, please refer to [the documentation of debug](https://github.
 
 ### API
 
-You will find the documentation of the methods exposed in the section [API](./API.md).
+You will find the documentation of the methods exposed in the section [API](https://github.com/amalto/platform6-client-nodejs/blob/master/API.md).
 
 ## Release notes
 
