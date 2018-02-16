@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.1.0] - 2018-02-16
 ### Added
 - Add a link to the [`API.md`](./API.md) file on the `README.md`.
 - Add a license MIT on the `README.md`.
@@ -66,6 +68,7 @@ Nothing new.
 
 
 [Unreleased]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/HEAD..0.0.1-alpha.9
+[0.1.0]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.1.0..0.0.1-alpha.9
 [0.0.1-alpha.11]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.0.1-alpha.11..0.0.1-alpha.9
 [0.0.1-alpha.10]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.0.1-alpha.10..0.0.1-alpha.9
 [0.0.1-alpha.9]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/0.0.1-alpha.9..0.0.1-alpha.8
