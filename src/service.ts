@@ -123,7 +123,7 @@ class Service {
 		if (parameters.headers)
 			headers.push(...BusConnection.parseHeaders(receiverId, parameters.headers))
 
-		const commonMessage = await BusConnection.createCommonMessage(this.idKey, headers, parameters.attachments || [])
+		const commonMessage = await BusConnection.createCommonMessage(this.idKey, parameters.receiverId, headers, parameters.attachments || [])
 		const response = await this.sendCommonMessage(receiverId, commonMessage)
 
 		return response

@@ -24,11 +24,14 @@ export class CommonMessage extends Message<CommonMessage> {
 	public id: string
 
 	@Field.d(2, 'string')
+	public destination: string
+
+	@Field.d(3, 'string')
 	public replyTo: string
 
-	@Field.d(3, Header, 'repeated')
+	@Field.d(4, Header, 'repeated')
 	public headers: Header[]
 
-	@Field.d(4, Attachment, 'repeated')
+	@Field.d(5, Attachment, 'repeated')
 	public attachments: Attachment[]
 }

@@ -91,15 +91,16 @@ export class BusConnection {
 	 * Create a common message.
 	 *
 	 * @param senderId Sender's id.
+	 * @param receiverId Receiver's id.
 	 * @param headers Array of headers (each header's key must be unique).
 	 * @param attachments Array of attachments.
 	 */
-	static createCommonMessage(senderId: string, headers: Header[], attachments: Attachment[]): CommonMessage {
+	static createCommonMessage(senderId: string, receiverId: string, headers: Header[], attachments: Attachment[]): CommonMessage {
 		const keys = headers.map(h => h.key)
 		if (keys.some((key, index) => keys.indexOf(key) !== index))
 			throw new Error(`Unable to create a common message: some headers' keys are not unique.`)
 
-		const payload = { id: uuid(), replyTo: senderId, headers, attachments }
+		const payload = { id: uuid(), destination: Constants.RECEIVER_ID_PREFIX + receiverId, replyTo: senderId, headers, attachments }
 		const errorMessage = CommonMessage.verify(payload)
 
 		if (errorMessage) throw new Error(`Unable to create a common message: ${errorMessage}`)
