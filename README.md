@@ -2,19 +2,17 @@
 
 > :construction: This project is currently in development. :construction:
 
-:warning: This library is only useful for the users of [Platform 6](https://github.com/amalto/platform6-wiki)!
+:warning: This library is only useful for the users of [Platform 6](https://documentation.amalto.com/b2box/master/)!
 
-This repository is a [Platform 6 client](https://github.com/amalto/platform6-wiki/blob/master/create-service.md#platform-6-clients) aiming to help the development a [service](https://github.com/amalto/platform6-wiki/blob/master/create-service.md#platform-6-clients) in JavaScript.
+This repository is a [Platform 6 client](https://documentation.amalto.com/b2box/master/developer-guide/platform6-clients/) aiming to help the development a [service](https://documentation.amalto.com/b2box/master/developer-guide/getting-started/) in JavaScript.
 It exposes, among others, methods to facilitate the communication with a Platform 6 instance.
 
 ## Requirements
 
-Platform 6 depends on:
+Platform 6 client depends on:
 
 - [Node.js](https://nodejs.org/en/) (version `>= 4`),
-- [_b2box_](https://github.com/amalto/platform6-wiki/blob/master/glossary.md#b2box) (version `5.13.8` and higher)
-
-> _b2box_ is the term used to define the previous versions of _Platform 6_.
+- [Platform 6](https://documentation.amalto.com/b2box/master/user-guide/getting-started/) (version `5.15.1` and higher)
 
 ## Installing the client
 
