@@ -9,3 +9,4 @@ script:
 notifications:
   email:
   - roxane.mace@amalto.com
+after_success: npx codecov --file=./coverage/lcov.info

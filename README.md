@@ -3,7 +3,7 @@
 > [Platform 6](https://documentation.amalto.com/b2box/master/) Node.js client
 
 [![Build Status](https://api.travis-ci.org/amalto/platform6-client-nodejs.svg?brancgh=master)](https://travis-ci.org/amalto/platform6-client-nodejs)
-[![Coverage Status](https://coveralls.io/repos/github/amalto/platform6-client-nodejs/badge.svg?branch=master)](https://coveralls.io/github/avajs/ava?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/amalto/platform6-client-nodejs/badge.svg?branch=master)](https://coveralls.io/github/amalto/platform6-client-nodejs?branch=master)
 
 This repository is a [Platform 6 client](https://documentation.amalto.com/b2box/master/developer-guide/platform6-clients/) aiming to help the development a [service](https://documentation.amalto.com/b2box/master/developer-guide/getting-started/) in JavaScript.
 It exposes, among others, methods to facilitate the communication with a Platform 6 instance.
