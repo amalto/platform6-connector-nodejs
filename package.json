@@ -24,7 +24,7 @@
         "build": "npm run webpack --",
         "build:watch": "npm run build -- --watch",
         "test": "npm run ava --",
-        "test:update": "npm run tests -- --update-snapshots",
+        "test:update": "npm run test -- --update-snapshots",
         "webpack": "./node_modules/.bin/webpack",
         "ava": "./node_modules/.bin/ava",
         "ava:watch": "npm run ava -- --watch"

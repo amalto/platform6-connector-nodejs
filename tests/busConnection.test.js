@@ -43,6 +43,7 @@ test('Prevent from creating a common message with an incorrect payload', t => {
 test('Prevent from creating a common message with two headers having the same key', t => {
 	t.throws(() => BusConnection.createCommonMessage(
 		'sender_id',
+		'receiver_id',
 		[
 			BusConnection.createHeader(receiverId, headerKey, 'value1'),
 			BusConnection.createHeader(receiverId, headerKey, 'value2')
@@ -54,11 +55,11 @@ test('Prevent from creating a common message with two headers having the same ke
 test('Get a header\'s value with correct key', t => testGetHeaderValue(t, 'key1', 'value1'))
 test('Get a header\'s value with incorrect key', t => testGetHeaderValue(t, 'key4', null))
 
-test('Display a common message request', t => testDisplayCommonMessage('service2', t))
-test('Display a common message response', t => testDisplayCommonMessage('service1', t))
+test('Display a common message request', t => testDisplayCommonMessage('service2', 'service1', t))
+test('Display a common message response', t => testDisplayCommonMessage('service1', 'service2', t))
 
-function testDisplayCommonMessage(replyTo, t) {
-	const commonMessage = BusConnection.createCommonMessage(replyTo, [], [])
+function testDisplayCommonMessage(replyTo, destination, t) {
+	const commonMessage = BusConnection.createCommonMessage(replyTo, destination, [], [])
 	const oldDebugLog = debug.log
 
 	// The randomly generated id breaks the test
@@ -71,7 +72,7 @@ function testDisplayCommonMessage(replyTo, t) {
 }
 
 function testGetHeaderValue(t, requestedKey, expected) {
-	const commonMessage = BusConnection.createCommonMessage(serviceId, headers, [])
+	const commonMessage = BusConnection.createCommonMessage(serviceId, receiverId, headers, [])
 	const oldDebugLog = debug.log
 
 	debug.enable(`${Constants.PLATFORM6}:*`)
