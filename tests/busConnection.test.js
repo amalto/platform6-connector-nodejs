@@ -1,4 +1,4 @@
-const Service = require('../lib/service').default
+const Service = require('../src/service').default
 const test = require('ava')
 const debug = require('debug')
 

@@ -46,6 +46,7 @@
         "ava": "^0.24.0",
         "nyc": "^11.6.0",
         "ts-loader": "^3.5.0",
+        "ts-node": "^5.0.1",
         "typescript": "^2.8.1",
         "uglifyjs-webpack-plugin": "^1.2.4",
         "webpack": "^3.11.0",
@@ -53,5 +54,18 @@
     },
     "engines": {
         "node": ">=4"
-    }
+    },
+    "ava": {
+        "require": [
+            "ts-node/register"
+        ]
+    },
+	"nyc": {
+		"extension": [
+			".ts"
+		],
+		"include": [
+			"src/**/*.ts"
+		]
+	}
 }

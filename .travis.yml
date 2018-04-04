@@ -6,7 +6,6 @@ cache:
   - directories: node_modules
 before_install: npm install --global npm@latest
 script:
-  - npm run build
   - npm run test:coverage
   - npm run test:report
 after_success: npx nyc report --reporter=text-lcov | npx coveralls
