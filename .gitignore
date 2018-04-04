@@ -3,6 +3,5 @@
 .nyc_output/
 node_modules/
 lib/
-tests/snapshots/
 .DS_Store
 npm-debug.log
