@@ -21,16 +21,12 @@
     ],
     "scripts": {
         "release": "./scripts/release.sh",
-        "build": "npm run webpack --",
+        "build": "npx webpack",
+        "test": "npx ava",
         "build:watch": "npm run build -- --watch",
-        "test": "npm run ava --",
-        "test:update": "npm run test -- --update-snapshots",
-        "test:coverage": "nyc npm run test",
-        "test:report": ".nyc -r html -r text -r text-summary report",
-        "webpack": "./node_modules/.bin/webpack",
-        "nyc": "./node_modules/.bin/nyc",
-        "ava": "./node_modules/.bin/ava",
-        "ava:watch": "npm run ava -- --watch"
+        "test:coverage": "npx nyc npm run test --",
+        "test:report": "npx nyc report --reporter=text-summary --reporter=html",
+        "test:update": "npm run test:coverage -- --update-snapshots"
     },
     "dependencies": {
         "debug": "^3.1.0",
