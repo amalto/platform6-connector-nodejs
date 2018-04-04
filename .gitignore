@@ -1,6 +1,7 @@
 .idea/
 .vscode/
 .nyc_output/
+coverage/
 node_modules/
 lib/
 .DS_Store
