@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Implement a continuous integration with [Travis](https://travis-ci.org/).
+- Add the coverage badge.
+- Expose a method to undeploy a service.
+### Changed
+- Update the structure of the common message object.
 
 ## [0.1.0] - 2018-02-16
 ### Added
