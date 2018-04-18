@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.2.0] - 2018-04-18
 ### Added
 - Implement a continuous integration with [Travis](https://travis-ci.org/).
 - Add the coverage badge.
@@ -74,6 +76,7 @@ Nothing new.
 
 
 [Unreleased]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/HEAD..0.0.1-alpha.9
+[0.2.0]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.2.0..0.0.1-alpha.9
 [0.1.0]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.1.0..0.0.1-alpha.9
 [0.0.1-alpha.11]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.0.1-alpha.11..0.0.1-alpha.9
 [0.0.1-alpha.10]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.0.1-alpha.10..0.0.1-alpha.9
