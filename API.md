@@ -4,6 +4,7 @@
 - [Service](#service)
 - [CommonMessage](#servicecommonmessage)
 - [Service.deployed](#servicedeployed)
+- [Service.undeploy](#serviceundeploy)
 - [Service.callService](#servicecallservice)
 - [Service.BusConnection.getHeaderValue](#servicebusconnectiongetheadervalue)
 - [Service.PermissionManager](#servicepermissionmanager)
@@ -108,6 +109,25 @@ __Example__:
 const service = new Service({ /* ... */ })
 
 service.deployed.catch(console.error)
+```
+
+## Service.undeploy
+
+Undeploy a service on the Platform 6 instance.
+
+`undeployService(username: string): Promise<CommonMessage>`
+
+__Argument__:
+```typescript
+/** Email of the user undeploying the service */
+username: string
+```
+
+__Example__
+```typescript
+const service = new Service({ /* ... */ })
+
+service.undeploy('admin@amalto.com')
 ```
 
 ## Service.callService
