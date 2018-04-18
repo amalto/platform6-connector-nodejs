@@ -62,18 +62,30 @@ class Service {
 	static PermissionsManager = PermissionsManager
 	static Constants = Constants
 
+	/** The identifier of the service */
+	private id: string
+	/** The service's id formatted into a key */
 	private idKey: string
+	/** The identifier of the node */
+	private nodeId: string
 
 	/** Hazelcast client instance */
 	public client: HazelcastClient
 	/** Platform 6 service instance */
 	public deployed: Promise<void>
 
+	/**
+	 * Create an instance of Platform 6 service
+	 *
+	 * @param parameters Deployment parameters
+	 */
 	constructor(parameters: Service.DeployParameters) {
+		this.id = parameters.id
 		this.idKey = Constants.SENDER_ID_PREFIX + parameters.id
 		this.deployed = this.deployService(parameters)
 	}
 
+	/** Create a Hazelcast client */
 	private async createHazelcastClient() {
 		const config = new Config.ClientConfig()
 		const hostname = process.env.HOSTNAME || 'localhost'
@@ -84,8 +96,14 @@ class Service {
 		config.properties['hazelcast.logging'] = new HazelcastLogger
 
 		this.client = await HazelcastClient.newHazelcastClient(config)
+		this.nodeId = this.client.getLocalEndpoint().uuid
 	}
 
+	/**
+	 * Deploy the service
+	 *
+	 * @param parameters Deployment parameters
+	 */
 	private async deployService(parameters: Service.DeployParameters) {
 		if (!this.client) await this.createHazelcastClient()
 
@@ -97,13 +115,30 @@ class Service {
 			receiverId: SERVICE_MANAGER_ID,
 			action: Constants.ACTION_DEPLOY,
 			headers: [
-				['node.id', this.client.getLocalEndpoint().uuid],
+				['node.id', this.nodeId],
 				['service.id', parameters.id],
 				['service.path', parameters.path],
 				['service.ctx', parameters.basePath],
 				['service.version', typeof versions === 'string' ? versions : versions.server],
 				['service.ui.version', typeof versions === 'string' ? versions : versions.client],
 				['service.ui', parameters.ui],
+			]
+		})
+	}
+
+	/**
+	 * Undeploy the service
+	 *
+	 * @param username Email of the user undeploying the service
+	 */
+	public async undeployService(username: string) {
+		await this.callService({
+			username: username,
+			receiverId: Constants.SERVICE_MANAGER_ID,
+			action: Constants.ACTION_UNDEPLOY,
+			headers: [
+				['node.id', this.nodeId],
+				['service.id', this.id]
 			]
 		})
 	}

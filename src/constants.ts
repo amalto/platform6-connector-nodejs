@@ -14,6 +14,7 @@ export const Constants = {
 	ID_SEPARATOR,
 	PERMISSION_ADMIN: '*',
 	ACTION_DEPLOY: 'deploy',
+	ACTION_UNDEPLOY: 'undeploy',
 	SERVICE_MANAGER_ID: `${PLATFORM6_APP_KEY}manager`,
 	SERVICE_SCRIPTS_ID: `${PLATFORM6_APP_KEY}scripts`,
 	USER_KEY: `${HEADER_KEY_PREFIX}user`,

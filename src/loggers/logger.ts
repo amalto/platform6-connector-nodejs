@@ -1,5 +1,4 @@
 import * as Debug from 'debug'
-import * as memoize from 'mem'
 import { Constants } from '../constants';
 
 export class Logger {
@@ -10,10 +9,8 @@ export class Logger {
 	}
 
 	get(...keywords: string[]) {
-		return Logger.getLogger(...this.scope, ...keywords)
+		return Logger.generateLogger(...this.scope, ...keywords)
 	}
-
-	static getLogger = memoize(Logger.generateLogger)
 
  	static generateLogger(...keywords: string[]) {
 		return Debug([Constants.PLATFORM6].concat(keywords).join(':'))
