@@ -97,7 +97,7 @@ class Service {
 			receiverId: SERVICE_MANAGER_ID,
 			action: Constants.ACTION_DEPLOY,
 			headers: [
-				['node.id', uuid()],
+				['node.id', this.client.getLocalEndpoint().uuid],
 				['service.id', parameters.id],
 				['service.path', parameters.path],
 				['service.ctx', parameters.basePath],

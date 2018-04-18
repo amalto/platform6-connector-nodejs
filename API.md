@@ -1,6 +1,6 @@
 # API
 
-## Table of contents:
+## Table of contents
 - [Service](#service)
 - [CommonMessage](#servicecommonmessage)
 - [Service.deployed](#servicedeployed)

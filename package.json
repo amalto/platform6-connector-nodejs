@@ -60,12 +60,12 @@
             "ts-node/register"
         ]
     },
-	"nyc": {
-		"extension": [
-			".ts"
-		],
-		"include": [
-			"src/**/*.ts"
-		]
-	}
+    "nyc": {
+        "extension": [
+            ".ts"
+        ],
+        "include": [
+            "src/**/*.ts"
+        ]
+    }
 }
