@@ -17,7 +17,7 @@ export type HeaderObject = Header | HeaderDefinition
  * @param key Header's key.
  */
 export function formatHeaderKey(serviceId: string, key: string): string {
-	return Constants.HEADER_KEY_PREFIX + serviceId + Constants.ID_SEPARATOR + key
+	return serviceId + Constants.ID_SEPARATOR + key
 }
 
 /**

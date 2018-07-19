@@ -151,12 +151,12 @@ class Service {
 	 */
 	public async callService(parameters: Service.CallServiceParameters): Promise<CommonMessage> {
 		const { receiverId } = parameters
-		const headers = [BusConnection.createHeader(null, Constants.USER_KEY, parameters.username)]
+		const headers = [BusConnection.createHeader(Constants.PLATFORM6, Constants.USER_KEY, parameters.username)]
 
 		if (parameters.action)
-			headers.push(BusConnection.createHeader(receiverId, 'action', parameters.action))
+			headers.push(BusConnection.createHeader(Constants.PLATFORM6, 'request.action', parameters.action))
 		if (parameters.headers)
-			headers.push(...BusConnection.parseHeaders(receiverId, parameters.headers))
+			headers.push(...BusConnection.parseHeaders(Constants.PLATFORM6, parameters.headers))
 
 		const commonMessage = await BusConnection.createCommonMessage(this.idKey, parameters.receiverId, headers, parameters.attachments || [])
 		const response = await this.sendCommonMessage(receiverId, commonMessage)

@@ -13,7 +13,7 @@ It exposes, among others, methods to facilitate the communication with a Platfor
 Platform 6 client depends on:
 
 - [Node.js](https://nodejs.org/en/) (version `>= 4`),
-- [Platform 6](https://documentation.amalto.com/b2box/master/user-guide/getting-started/) (version `5.15.3` and higher)
+- [Platform 6](https://documentation.amalto.com/b2box/master/user-guide/getting-started/) (version `5.17.0` and higher)
 
 ## Installing the client
 

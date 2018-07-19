@@ -1,12 +1,10 @@
 const ID_SEPARATOR = '.'
-const HEADER_KEY_PREFIX = `b2${ID_SEPARATOR}`
 const PLATFORM6 = 'platform6'
 const PLATFORM6_APP_KEY = PLATFORM6 + ID_SEPARATOR
 const RECEIVER_ID_PREFIX = `cmb${ID_SEPARATOR}`
 const SENDER_ID_PREFIX = `tmp${ID_SEPARATOR}`
 
 export const Constants = {
-	HEADER_KEY_PREFIX,
 	PLATFORM6,
 	PLATFORM6_APP_KEY,
 	RECEIVER_ID_PREFIX,
@@ -17,5 +15,5 @@ export const Constants = {
 	ACTION_UNDEPLOY: 'undeploy',
 	SERVICE_MANAGER_ID: `${PLATFORM6_APP_KEY}manager`,
 	SERVICE_SCRIPTS_ID: `${PLATFORM6_APP_KEY}scripts`,
-	USER_KEY: `${HEADER_KEY_PREFIX}user`,
+	USER_KEY: `user`,
 }
