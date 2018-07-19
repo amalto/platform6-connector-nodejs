@@ -1,6 +1,6 @@
 {
     "name": "@amalto/platform6-client",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "Platform 6 Node.js client",
     "homepage": "https://github.com/amalto/platform6-client-nodejs",
     "bugs": "https://github.com/amalto/platform6-client-nodejs/issues",

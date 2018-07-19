@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.2] - 2018-07-19
+
 ## [0.2.0] - 2018-04-18
 ### Added
 - Implement a continuous integration with [Travis](https://travis-ci.org/).
@@ -76,6 +78,7 @@ Nothing new.
 
 
 [Unreleased]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/HEAD..0.0.1-alpha.9
+[0.2.2]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.2.2..0.0.1-alpha.9
 [0.2.0]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.2.0..0.0.1-alpha.9
 [0.1.0]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.1.0..0.0.1-alpha.9
 [0.0.1-alpha.11]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.0.1-alpha.11..0.0.1-alpha.9
