@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ## [0.2.2] - 2018-07-19
+- Update CMB headers to match latest version of platform6.
+- Update snapshot test.
 
 ## [0.2.0] - 2018-04-18
 ### Added
