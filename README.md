@@ -1,11 +1,11 @@
 # Platform 6 Node.js Client
 
-> [Platform 6](https://documentation.amalto.com/b2box/master/) Node.js client
+> [Platform 6](https://documentation.amalto.com/platform6/master/) Node.js client
 
 [![Build Status](https://api.travis-ci.org/amalto/platform6-client-nodejs.svg?brancgh=master)](https://travis-ci.org/amalto/platform6-client-nodejs)
 [![Coverage Status](https://coveralls.io/repos/github/amalto/platform6-client-nodejs/badge.svg?branch=master)](https://coveralls.io/github/amalto/platform6-client-nodejs?branch=master)
 
-This repository is a [Platform 6 client](https://documentation.amalto.com/b2box/master/developer-guide/platform6-clients/) aiming to help the development a [service](https://documentation.amalto.com/b2box/master/developer-guide/getting-started/) in JavaScript.
+This repository is a [Platform 6 client](https://documentation.amalto.com/platform6/master/developer-guide/platform6-clients/) aiming to help the development a [service](https://documentation.amalto.com/platform6/master/developer-guide/getting-started/) in JavaScript.
 It exposes, among others, methods to facilitate the communication with a Platform 6 instance.
 
 ## Requirements
@@ -13,7 +13,7 @@ It exposes, among others, methods to facilitate the communication with a Platfor
 Platform 6 client depends on:
 
 - [Node.js](https://nodejs.org/en/) (version `>= 4`),
-- [Platform 6](https://documentation.amalto.com/b2box/master/user-guide/getting-started/) (version `5.17.0` and higher)
+- [Platform 6](https://documentation.amalto.com/platform6/master/user-guide/getting-started/) (version `5.17.0` and higher)
 
 ## Installing the client
 
