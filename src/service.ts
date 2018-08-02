@@ -28,8 +28,6 @@ declare namespace Service {
 	}
 
 	interface DeployParameters {
-		/** Email address of the caller. */
-		username: string
 		/** Service's identifier. */
 		id: string
 		/** Path of the endpoint's URL to get the service's client script. */
@@ -43,8 +41,6 @@ declare namespace Service {
 	}
 
 	interface CallServiceParameters {
-		/** Email address of the caller. */
-		username: string
 		/** Identifier of the recipient service. */
 		receiverId: string
 		/** Define the Platform 6 specific `action` header value. */
@@ -111,7 +107,6 @@ class Service {
 		const { versions } = parameters
 
 		const response = await this.callService({
-			username: parameters.username,
 			receiverId: SERVICE_MANAGER_ID,
 			action: Constants.ACTION_DEPLOY,
 			headers: [
@@ -128,12 +123,9 @@ class Service {
 
 	/**
 	 * Undeploy the service
-	 *
-	 * @param username Email of the user undeploying the service
 	 */
-	public async undeployService(username: string) {
+	public async undeployService() {
 		await this.callService({
-			username: username,
 			receiverId: Constants.SERVICE_MANAGER_ID,
 			action: Constants.ACTION_UNDEPLOY,
 			headers: [
@@ -151,7 +143,7 @@ class Service {
 	 */
 	public async callService(parameters: Service.CallServiceParameters): Promise<CommonMessage> {
 		const { receiverId } = parameters
-		const headers = [BusConnection.createHeader(Constants.PLATFORM6, Constants.USER_KEY, parameters.username)]
+		const headers = []
 
 		if (parameters.action)
 			headers.push(BusConnection.createHeader(Constants.PLATFORM6, 'request.action', parameters.action))
