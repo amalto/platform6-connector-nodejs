@@ -19,9 +19,6 @@ Platform 6 service.
 __Argument:__
 ```typescript
 interface DeployParameters {
-	/** Email address of the caller. */
-	username: string
-
 	/** Service's identifier. */
 	id: string
 
@@ -55,9 +52,8 @@ const myServiceId = 'demo.typescript'
 
 // Create a new service named 'demo.typescript'
 new Service({
-	username: 'admin@amalto.com',
 	id: myServiceId,
-	path: baseUrl + myServiceId,
+	path: `/${myServiceId}/api`,
 	basePath: 'http://docker.for.mac.localhost:8000',
 	versions: '1.0.0',
 	ui: {
@@ -115,19 +111,13 @@ service.deployed.catch(console.error)
 
 Undeploy a service on the Platform 6 instance.
 
-`undeployService(username: string): Promise<CommonMessage>`
-
-__Argument__:
-```typescript
-/** Email of the user undeploying the service */
-username: string
-```
+`undeployService(): Promise<CommonMessage>`
 
 __Example__
 ```typescript
 const service = new Service({ /* ... */ })
 
-service.undeploy('admin@amalto.com')
+service.undeploy()
 ```
 
 ## Service.callService
@@ -139,9 +129,6 @@ Send a request to another service.
 __Argument:__
 ```typescript
 interface CallServiceParameters {
-	/** Email address of the caller. */
-	username: string
-
 	/** Identifier of the recipient service. */
 	receiverId: string
 
@@ -162,10 +149,10 @@ const service = new Service({ /* ... */ })
 
 // Ask the service platform6.scripts to create a new script
 service.callService({
-	username: 'admin@amalto.com',
 	receiverId: Service.Constants.SERVICE_SCRIPTS_ID,
 	action: 'add',
 	headers: [
+		['platform6.request.user', 'admin@amalto.com],
 		['scriptId', 'ondiflo.script1'],
 		['scriptDescription', '{EN: Scritpt 1 of Ondiflo}'],
 		['mainScriptContent', 'pipeline.variables().each() println "${it}"']
@@ -185,9 +172,11 @@ const service = new Service({ /* ... */ })
 
 // Ask the service platform6.scripts to list its items
 const scriptsResponse = await service.callService({
-	username: 'admin@amalto.com',
 	receiverId: Service.Constants.SERVICE_SCRIPTS_ID,
-	action: 'list'
+	action: 'list',
+	headers: [
+		['platform6.request.user', 'admin@amalto.com]
+	]
 })
 
 // Get the value from the service Platform 6 Scripts's response
