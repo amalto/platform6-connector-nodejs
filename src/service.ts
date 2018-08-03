@@ -4,7 +4,6 @@ import { CommonMessage, Header, Attachment } from './messages/commonMessage'
 import HazelcastLogger from './loggers/hazelcastLogger'
 import { Constants } from './constants'
 import { CommonMessageSerializer } from './serializers/commonMessageSerializer'
-import { v4 as uuid } from 'uuid'
 
 import * as PermissionsManager from './permissionsManager'
 
@@ -106,7 +105,7 @@ class Service {
 		const { SERVICE_MANAGER_ID } = Constants
 		const { versions } = parameters
 
-		const response = await this.callService({
+		await this.callService({
 			receiverId: SERVICE_MANAGER_ID,
 			action: Constants.ACTION_DEPLOY,
 			headers: [

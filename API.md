@@ -152,7 +152,7 @@ service.callService({
 	receiverId: Service.Constants.SERVICE_SCRIPTS_ID,
 	action: 'add',
 	headers: [
-		['platform6.request.user', 'admin@amalto.com],
+		['platform6.request.user', 'admin@amalto.com'],
 		['scriptId', 'ondiflo.script1'],
 		['scriptDescription', '{EN: Scritpt 1 of Ondiflo}'],
 		['mainScriptContent', 'pipeline.variables().each() println "${it}"']
@@ -175,7 +175,7 @@ const scriptsResponse = await service.callService({
 	receiverId: Service.Constants.SERVICE_SCRIPTS_ID,
 	action: 'list',
 	headers: [
-		['platform6.request.user', 'admin@amalto.com]
+		['platform6.request.user', 'admin@amalto.com']
 	]
 })
 
