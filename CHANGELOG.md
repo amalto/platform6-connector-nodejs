@@ -6,15 +6,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Use the latest version of the Hazelcast node.js client's dependency.
+- The headers keys are no longer prefixed by `platform6.`.
+- The header `user` is no longer required for the service's deployment.
+- Update the URL of the Platform 6 documentation in the [README.md](./README.md).
 
 ## [0.2.2] - 2018-07-19
 ### Changed
-
 - Update CMB headers to match the latest version of Platform 6.
 
 ## [0.2.0] - 2018-04-18
 ### Added
 - Implement a continuous integration with [Travis](https://travis-ci.org/).
+### Changed
+Upgrade the version of the dependency Hazelcast node.js client
 - Add the coverage badge.
 - Expose a method to undeploy a service.
 ### Changed
