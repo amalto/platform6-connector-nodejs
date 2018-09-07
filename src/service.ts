@@ -1,6 +1,6 @@
-import { Address, Client as HazelcastClient, Config } from 'hazelcast-client'
+import { Client as HazelcastClient, Config } from 'hazelcast-client'
 import { BusConnection, HeaderObject } from './busConnection'
-import { CommonMessage, Header, Attachment } from './messages/commonMessage'
+import { CommonMessage, Attachment } from './messages/commonMessage'
 import HazelcastLogger from './loggers/hazelcastLogger'
 import { Constants } from './constants'
 import { CommonMessageSerializer } from './serializers/commonMessageSerializer'
@@ -89,8 +89,8 @@ class Service {
 		const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 5900
 
 		config.serializationConfig.customSerializers.push(new CommonMessageSerializer)
-		config.networkConfig.addresses = [new Address(hostname, port)]
-		config.properties['hazelcast.logging'] = new HazelcastLogger
+		config.networkConfig.addresses = [`${hostname}:${port}`]
+		config.properties['hazelcast.logging'] = new HazelcastLogger as any
 
 		this.client = await HazelcastClient.newHazelcastClient(config)
 		this.nodeId = this.client.getLocalEndpoint().uuid
