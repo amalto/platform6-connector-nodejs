@@ -11,16 +11,6 @@ export type HeaderDefinition = [string, string | object]
 export type HeaderObject = Header | HeaderDefinition
 
 /**
- * Format a common message header's key.
- *
- * @param serviceId Receiver's id.
- * @param key Header's key.
- */
-export function formatHeaderKey(serviceId: string, key: string): string {
-	return serviceId + Constants.ID_SEPARATOR + key
-}
-
-/**
  * Display in the console a common message.
  *
  * @param counterpartIdKey Receiver's id key.
@@ -28,7 +18,6 @@ export function formatHeaderKey(serviceId: string, key: string): string {
  */
 export function displayCommonMessage(counterpartIdKey: string, commonMessage: CommonMessage): void {
 	const currentIdKey = commonMessage.replyTo
-	const counterpartId = counterpartIdKey.split(Constants.ID_SEPARATOR).slice(1).join(Constants.ID_SEPARATOR)
 	const log = logger.get(currentIdKey === counterpartIdKey ? 'response' : 'request', counterpartIdKey)
 
 	log(JSON.stringify(commonMessage, null, 2))
@@ -38,18 +27,15 @@ export function displayCommonMessage(counterpartIdKey: string, commonMessage: Co
  * Get the value of a common message's header by key.
  *
  * @param commonMessage Common message received.
- * @param serviceId Sender's id.
  * @param key Header's key.
  */
-export function getHeaderValue(commonMessage: CommonMessage, serviceId: string, key: string): string | object | null {
-	const headerKey = formatHeaderKey(serviceId, key)
-
+export function getHeaderValue(commonMessage: CommonMessage, key: string): string | object | null {
 	const header = CommonMessage
 		.fromObject(commonMessage.toJSON()).headers
-		.find(header => header.key === headerKey)
+		.find(header => header.key === key)
 
 	if (!header) {
-		logger.get('error')(`Header with key ${headerKey} is not found!`)
+		logger.get('error')(`Header with key ${key} is not found!`)
 
 		return null
 	}
@@ -63,10 +49,10 @@ export function parseAttachment(attachments: AttachmentObject[]) {
 		: BusConnection.createAttachment(attachment[0], stringify(attachment[1])))
 }
 
-export function parseHeaders(receiverId: string, headers: HeaderObject[]) {
+export function parseHeaders(headers: HeaderObject[]) {
 	return headers.map(header => header instanceof Header
 		? header
-		: BusConnection.createHeader(receiverId, header[0], header[1]))
+		: BusConnection.createHeader(header[0], header[1]))
 }
 
 function parse(value: string) {
@@ -82,7 +68,6 @@ function stringify(value: string | object) {
 }
 
 export class BusConnection {
-	static formatHeaderKey = formatHeaderKey
 	static getHeaderValue = getHeaderValue
 	static parseHeaders = parseHeaders
 	static displayCommonMessage = displayCommonMessage
@@ -111,13 +96,12 @@ export class BusConnection {
 	/**
 	 * Create a common message's header
 	 *
-	 * @param receiverId Receiver's id.
 	 * @param key The key of the header.
 	 * @param value The value of the header.
 	 */
-	static createHeader(receiverId: string, key: string, value: string | object): Header {
+	static createHeader(key: string, value: string | object): Header {
 		const payload = {
-			key: receiverId ? formatHeaderKey(receiverId, key) : key,
+			key,
 			value: stringify(value)
 		}
 

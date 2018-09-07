@@ -132,6 +132,9 @@ interface CallServiceParameters {
 	/** Identifier of the recipient service. */
 	receiverId: string
 
+	/** Email address of the caller. */
+	username?: string
+
 	/** Define the Platform 6 specific `action` header value. */
 	action?: string
 
@@ -149,6 +152,7 @@ const service = new Service({ /* ... */ })
 
 // Ask the service platform6.scripts to create a new script
 service.callService({
+	username: 'admin@amalto.com',
 	receiverId: Service.Constants.SERVICE_SCRIPTS_ID,
 	action: 'add',
 	headers: [
@@ -172,11 +176,10 @@ const service = new Service({ /* ... */ })
 
 // Ask the service platform6.scripts to list its items
 const scriptsResponse = await service.callService({
+	username: 'admin@amalto.com',
 	receiverId: Service.Constants.SERVICE_SCRIPTS_ID,
 	action: 'list',
-	headers: [
-		['platform6.request.user', 'admin@amalto.com']
-	]
+	headers: [ ['platform6.request.user', 'admin@amalto.com'] ]
 })
 
 // Get the value from the service Platform 6 Scripts's response

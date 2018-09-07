@@ -42,6 +42,8 @@ declare namespace Service {
 	interface CallServiceParameters {
 		/** Identifier of the recipient service. */
 		receiverId: string
+		/** Email address of the caller. */
+		username?: string
 		/** Define the Platform 6 specific `action` header value. */
 		action?: string
 		/** Custom headers to be sent with the request. */
@@ -109,13 +111,13 @@ class Service {
 			receiverId: SERVICE_MANAGER_ID,
 			action: Constants.ACTION_DEPLOY,
 			headers: [
-				['node.id', this.nodeId],
-				['service.id', parameters.id],
-				['service.path', parameters.path],
-				['service.ctx', parameters.basePath],
-				['service.version', typeof versions === 'string' ? versions : versions.server],
-				['service.ui.version', typeof versions === 'string' ? versions : versions.client],
-				['service.ui', parameters.ui],
+				[`${Constants.PLATFORM6_APP_KEY}node.id`, this.nodeId],
+				[`${Constants.PLATFORM6_APP_KEY}service.id`, parameters.id],
+				[`${Constants.PLATFORM6_APP_KEY}service.path`, parameters.path],
+				[`${Constants.PLATFORM6_APP_KEY}service.ctx`, parameters.basePath],
+				[`${Constants.PLATFORM6_APP_KEY}service.version`, typeof versions === 'string' ? versions : versions.server],
+				[`${Constants.PLATFORM6_APP_KEY}service.ui.version`, typeof versions === 'string' ? versions : versions.client],
+				[`${Constants.PLATFORM6_APP_KEY}service.ui`, parameters.ui],
 			]
 		})
 	}
@@ -128,8 +130,8 @@ class Service {
 			receiverId: Constants.SERVICE_MANAGER_ID,
 			action: Constants.ACTION_UNDEPLOY,
 			headers: [
-				['node.id', this.nodeId],
-				['service.id', this.id]
+				[`${Constants.PLATFORM6_APP_KEY}node.id`, this.nodeId],
+				[`${Constants.PLATFORM6_APP_KEY}service.id`, this.id]
 			]
 		})
 	}
@@ -144,10 +146,12 @@ class Service {
 		const { receiverId } = parameters
 		const headers = []
 
+		if (parameters.username)
+			headers.push(BusConnection.createHeader(Constants.USER_KEY, parameters.username))
 		if (parameters.action)
-			headers.push(BusConnection.createHeader(Constants.PLATFORM6, 'request.action', parameters.action))
+			headers.push(BusConnection.createHeader(`${Constants.PLATFORM6_APP_KEY}request.action`, parameters.action))
 		if (parameters.headers)
-			headers.push(...BusConnection.parseHeaders(Constants.PLATFORM6, parameters.headers))
+			headers.push(...BusConnection.parseHeaders(parameters.headers))
 
 		const commonMessage = await BusConnection.createCommonMessage(this.idKey, parameters.receiverId, headers, parameters.attachments || [])
 		const response = await this.sendCommonMessage(receiverId, commonMessage)
