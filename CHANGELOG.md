@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.0.0] - 2018-09-21
 ### Changed
 - __BREAKING CHANGE__: the whole service deployment process API has been refactored for better asynchronous handling (see [the documentation of the new API](./API.md)).
 - The `BusConnection`, `Constants`, `PermissionManager` objects are now directly exported from the package.
@@ -94,6 +96,7 @@ Nothing new.
 
 
 [Unreleased]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/HEAD..0.0.1-alpha.9
+[2.0.0]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v2.0.0..0.0.1-alpha.9
 [1.0.0]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v1.0.0..0.0.1-alpha.9
 [0.2.2]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.2.2..0.0.1-alpha.9
 [0.2.0]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.2.0..0.0.1-alpha.9
