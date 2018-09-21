@@ -1,6 +1,5 @@
 import * as https from 'https'
 import { Constants } from './constants'
-import { userInfo } from 'os';
 
 export interface FormattedPermission {
 	feature: string
@@ -153,11 +152,11 @@ export function getUserPermissions(request: any): Promise<InstancePermissions> {
 		.on('error', reject))
 }
 
-
-/**
- * [{ feature: 'feature 1', action: 'action 1', value: 'value 1'}, { feature: 'feature 2', action: 'action 2', value: 'value 2'}]
- *
- * {}
- * {[feature]: { [action]: value }}
- *
- */
+export const PermissionsManager = {
+	checkIfUserIsSuperUser,
+	getPermissionsFromInstance,
+	parsePermissions,
+	hasPermissions,
+	hasAnyPermissions,
+	getUserPermissions
+}

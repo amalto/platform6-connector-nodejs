@@ -1,7 +1,7 @@
 import * as Debug from 'debug'
 import { Constants } from '../constants';
 
-export class Logger {
+class Logger {
 	scope: string[]
 
 	constructor(...scope: string[]) {

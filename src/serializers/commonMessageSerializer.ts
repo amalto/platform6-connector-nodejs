@@ -2,7 +2,7 @@ import { CommonMessage } from '../messages/commonMessage'
 import { DataInput, DataOutput } from 'hazelcast-client/lib/serialization/Data'
 import { Serializer } from 'hazelcast-client/lib/serialization/SerializationService'
 
-export class CommonMessageSerializer implements Serializer {
+class CommonMessageSerializer implements Serializer {
 	getId(): number {
 		return 10
 	}
@@ -15,3 +15,5 @@ export class CommonMessageSerializer implements Serializer {
 		output.writeByteArray([...CommonMessage.encode(object).finish()])
 	}
 }
+
+export default CommonMessageSerializer

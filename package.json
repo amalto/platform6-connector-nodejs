@@ -5,8 +5,8 @@
     "homepage": "https://github.com/amalto/platform6-client-nodejs",
     "bugs": "https://github.com/amalto/platform6-client-nodejs/issues",
     "license": "MIT",
-    "main": "lib/service.js",
-    "types": "lib/service.d.ts",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
     "repository": "github.com:amalto/platform6-client-nodejs.git",
     "keywords": [
         "amalto",
@@ -32,6 +32,7 @@
         "debug": "^3.1.0",
         "express": "^4.16.3",
         "hazelcast-client": "^0.9.0",
+        "mem": "^4.0.0",
         "protobufjs": "^6.8.6",
         "uuid": "^3.2.1"
     },

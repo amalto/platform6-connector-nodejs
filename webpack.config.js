@@ -1,13 +1,12 @@
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const webpack = require('webpack')
-const properties = require('./package')
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
 	entry: {
-		service: './src/service.ts'
+		index: './src/index.ts'
 	},
 	output: {
 		path: path.resolve(__dirname, './lib'),
