@@ -46,7 +46,7 @@ export interface DeployParameters {
  *
  * @return A promise resolving with a deployed instance of the Platform 6 service
  */
-export async function deployService(parameters: DeployParameters) {
+export async function deployService(parameters: DeployParameters): Promise<Service> {
 	const client = await createHazelcastClient()
 
 	const { SERVICE_MANAGER_ID } = Constants

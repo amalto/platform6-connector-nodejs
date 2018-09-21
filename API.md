@@ -1,72 +1,12 @@
 # API
 
 ## Table of contents
+- [CommonMessage](#commonmessage)
+- [Constants](#constants)
+- [Deploy a service](#deploy-a-service)
 - [Service](#service)
-- [CommonMessage](#servicecommonmessage)
-- [Service.deployed](#servicedeployed)
-- [Service.undeploy](#serviceundeploy)
-- [Service.callService](#servicecallservice)
-- [Service.BusConnection.getHeaderValue](#servicebusconnectiongetheadervalue)
-- [Service.PermissionManager](#servicepermissionmanager)
-- [Service.Constants](#serviceconstants)
-
-## Service
-
-Platform 6 service.
-
-`new Service(parameters: DeployParameters): Service`
-
-__Argument:__
-```typescript
-interface DeployParameters {
-	/** Service's identifier. */
-	id: string
-
-	/** Path of the endpoint's URL to get the service's client script. */
-	path: string
-
-	/** Base path of the endpoint's URL to get the service's client script.
-	 * Windows: `IP address`
-	 * Mac: `http://docker.for.mac.localhost:8000` */
-	basePath: string
-
-	/** Semver version of all the service's components. */
-	versions: Versions | string
-
-	/** Properties of the service's entry menu. */
-	ui: UserInterfaceProperties
-}
-
-interface Versions {
-	/** Semver version of the service server. */
-	server: string
-
-	/** Semver version of the service client. */
-	client: string
-}
-```
-
-__Example:__
-```typescript
-const myServiceId = 'demo.typescript'
-
-// Create a new service named 'demo.typescript'
-new Service({
-	id: myServiceId,
-	path: `/${myServiceId}/api`,
-	basePath: 'http://docker.for.mac.localhost:8000',
-	versions: '1.0.0',
-	ui: {
-		visible: true,
-		iconName: 'fa-code',
-		weight: 30,
-		label: {
-			'en-US': 'TypeScript',
-			'fr-FR': 'TypeScript'
-		}
-	}
-})
-```
+- [BusConnection](#busconnection)
+- [PermissionManager](#permissionmanager)
 
 ## CommonMessage
 
@@ -94,39 +34,126 @@ interface Header { key: string, value: string }
 interface Attachment { headers: Header[], bytes: string }
 ```
 
-## Service.deployed
+## Constants
 
-Platform 6 service instance.
+Platform 6 available constants.
 
-__Type__: `Promise<void>`
-
-__Example__:
 ```typescript
-const service = new Service({ /* ... */ })
+import { Constants } from '@amalto/platform6-client'
 
-service.deployed.catch(console.error)
+// Platform 6 Scripts service's id
+Constants.SERVICE_SCRIPTS_ID
+
+// Main key of a response common message
+Constants.PLATFORM6_RESPONSE_VALUE
 ```
 
-## Service.undeploy
+## Deploy a service
 
-Undeploy a service on the Platform 6 instance.
+`function deployService(parameters: DeployParameters): Promise<Service> `
 
-`undeployService(): Promise<CommonMessage>`
+__Argument__
+
+```typescript
+export interface DeployParameters {
+	/** Service's identifier. */
+	id: string
+	/** Path of the endpoint's URL to get the service's client script. */
+	path: string
+	/** Base path of the endpoint's URL to get the service's client script.  */
+	basePath: string
+	/** Semver version of all the service's components. */
+	versions: Versions | string
+	/** Properties of the service's entry menu. */
+	ui: UserInterfaceProperties
+}
+
+export interface Versions {
+	/** Semver version of the service server. */
+	server: string
+	/** Semver version of the service client. */
+	client: string
+}
+
+export interface UserInterfaceProperties {
+	/** Visibility of the entry menu. */
+	visible: boolean
+	/** Icon's name of the entry menu. */
+	iconName: string
+	/** Position of the entry in the menu. */
+	weight: number
+	/** Multi-language label for the entry menu (language: 'en-US', 'fr-FR'). */
+	label: { [key: string]: string }
+}
+```
+
+__Result__
+
+The [service's instance](#service).
 
 __Example__
-```typescript
-const service = new Service({ /* ... */ })
 
-service.undeploy()
+```typescript
+import { deployService } from '@amalto/platform6-client'
+
+const myServiceId = 'demo.typescript'
+
+// Create a new service named 'demo.typescript'
+deployService({
+	id: myServiceId,
+	path: `/${myServiceId}/api`,
+	basePath: 'http://docker.for.mac.localhost:8000',
+	versions: '1.0.0',
+	ui: {
+		visible: true,
+		iconName: 'fa-code',
+		weight: 30,
+		label: {
+			'en-US': 'TypeScript',
+			'fr-FR': 'TypeScript'
+		}
+	}
+})
 ```
 
-## Service.callService
+## Service
 
-Send a request to another service.
+### Get the id of the instance on which is deployed the service
 
-`callService(parameters: CallServiceParameters): Promise<CommonMessage>`
+__Example__
 
-__Argument:__
+```typescript
+import { deployService } from '@amalto/platform6-client'
+
+deployService({ /* ... */ })
+	.then((service: any) => {
+		console.log('The service "%s" has been deployed on instance "%s".', service.id, service.instanceId)
+	})
+```
+
+### Undeploy a service
+
+`function undeployService(): Promise<CommonMessage>`
+
+__Result__
+
+The Platform 6 Manager service response.
+
+__Example__
+
+```typescript
+import { deployService } from '@amalto/platform6-client'
+
+deployService({ /* ... */ })
+	.then((service: any) => service.undeployService())
+```
+
+### Send a request to another service
+
+`function callService(parameters: CallServiceParameters): Promise<CommonMessage>`
+
+__Argument__
+
 ```typescript
 interface CallServiceParameters {
 	/** Identifier of the recipient service. */
@@ -146,47 +173,68 @@ interface CallServiceParameters {
 }
 ```
 
-__Example__:
-```typescript
-const service = new Service({ /* ... */ })
+__Result__
 
-// Ask the service platform6.scripts to create a new script
-service.callService({
-	username: 'admin@amalto.com',
-	receiverId: Service.Constants.SERVICE_SCRIPTS_ID,
-	action: 'add',
-	headers: [
-		['platform6.request.user', 'admin@amalto.com'],
-		['scriptId', 'ondiflo.script1'],
-		['scriptDescription', '{EN: Scritpt 1 of Ondiflo}'],
-		['mainScriptContent', 'pipeline.variables().each() println "${it}"']
-	]
-})
+The Platform 6 receiver service response.
+
+__Example__
+
+```typescript
+import { Constants, deployService } from '@amalto/platform6-client'
+
+deployService({ /* ... */ })
+	.then((service: any) => {
+		// Ask the Scripts service to create a new script
+		service.callService({
+			username: 'admin@amalto.com',
+			receiverId: Constants.SERVICE_SCRIPTS_ID,
+			action: 'add',
+			headers: [
+				['id', 'ondiflo.script1'],
+				['description', '{EN: Scritpt 1 of Ondiflo}'],
+				['main.content', 'pipeline.variables().each() println "${it}"']
+			]
+		})
+	})
 ```
 
-## Service.BusConnection.getHeaderValue
+## BusConnection
 
-Get the value of a common message's header by key.
+Some methods to manage the common messages.
 
-`getHeaderValue(commonMessage: CommonMessage, serviceId: string, key: string): string | object | null`
+### Get the value of a common message's header by key
 
-__Example__:
+`function getHeaderValue(commonMessage: CommonMessage, key: string): string | object | null`
+
+__Arguments__
+
+- `commonMessage`: the common message received
+- `key`: the header's key
+
+__Result__
+
+The value of the requested header's key.
+
+__Example__
+
 ```typescript
-const service = new Service({ /* ... */ })
+import { BusConnection, Constants, deployService } from '@amalto/platform6-client'
 
-// Ask the service platform6.scripts to list its items
-const scriptsResponse = await service.callService({
-	username: 'admin@amalto.com',
-	receiverId: Service.Constants.SERVICE_SCRIPTS_ID,
-	action: 'list',
-	headers: [ ['platform6.request.user', 'admin@amalto.com'] ]
-})
+deployService({ /* ... */ })
+	.then((service: any) => {
+		// Ask the Scripts service to list its items ids
+		const scriptsResponse = await service.callService({
+			username: 'admin@amalto.com',
+			receiverId: Constants.SERVICE_SCRIPTS_ID,
+			action: 'list.ids'
+		})
 
-// Get the value from the service Platform 6 Scripts's response
-const items = Service.BusConnection.getHeaderValue(scriptsResponse, Service.Constants.SERVICE_SCRIPTS_ID, 'scriptIds')
+		// Get the value from the service Platform 6 Scripts's response
+		const ids = BusConnection.getHeaderValue(scriptsResponse, Constants.SERVICE_SCRIPTS_ID, Constants.PLATFORM6_RESPONSE_VALUE)
+	})
 ```
 
-## Service.PermissionManager
+## PermissionManager
 
 Each user is assigned a set of permissions on a instance.
 A permission is a string of characters structured as follows `feature=action(values)` and which allows the user to perform a specific action on a specific feature.
@@ -218,13 +266,18 @@ interface FormattedPermission {
 }
 ```
 
-## Get the permissions of a user
+### Get the permissions of a user
 
-`getUserPermissions(request: any): Promise<InstancePermissions>`
+`function getUserPermissions(request: any): Promise<InstancePermissions>`
 
-__Example__:
+__Argument__
+
+- `request`: the user's HTTP request
+
+__Example__
+
 ```typescript
-const service = new Service({ /* ... */ })
+import { PermissionsManager } from '@amalto/platform6-client'
 
 app.get(`${path}/permissions`, async function (request, response) {
 	// Retrieve the permissions of the user doing the request
@@ -234,19 +287,20 @@ app.get(`${path}/permissions`, async function (request, response) {
 })
 ```
 
-## Check if the user has the required permissions on a specific instance
+### Check if the user has the required permissions on a specific instance
 
-`hasPermissions(instance: string, userInstancesPermissions: InstancePermissions, requiredPermissions: FormattedPermission[]): boolean`
+`function hasPermissions(instance: string, userInstancesPermissions: InstancePermissions, requiredPermissions: FormattedPermission[]): boolean`
 
-__Arguments:__
+__Arguments__
 
 - `instance`: the name of the instance on which the user is assigned
 - `userInstancesPermissions`: the set of permissions assigned to a user on all instances
 - `requiredPermissions`: the permission(s) required to process an action
 
-__Example__:
+__Example__
+
 ```typescript
-const service = new Service({ /* ... */ })
+import { PermissionsManager } from '@amalto/platform6-client'
 
 app.get(`${path}/permissions`, async function (request, response) {
 	// Retrieve the permissions of the user doing the request
@@ -261,19 +315,20 @@ app.get(`${path}/permissions`, async function (request, response) {
 })
 ```
 
-## Check if the user has at least one of the required permissions
+### Check if the user has at least one of the required permissions
 
-`hasAnyPermissions(instance: string, userInstancesPermissions: InstancePermissions, requiredPermissions: FormattedPermission[]): boolean`
+`function hasAnyPermissions(instance: string, userInstancesPermissions: InstancePermissions, requiredPermissions: FormattedPermission[]): boolean`
 
-__Arguments:__
+__Arguments__
 
 - `instance`: the name of the instance on which the user is assigned
 - `userInstancesPermissions`: the set of permissions assigned to a user on all instances
 - `requiredPermissions`: the permission(s) required to process an action
 
-__Example__:
+__Example__
+
 ```typescript
-const service = new Service({ /* ... */ })
+import { PermissionsManager } from '@amalto/platform6-client'
 
 app.get(`${path}/permissions`, async function (request, response) {
 	// Retrieve the permissions of the user doing the request
@@ -281,16 +336,11 @@ app.get(`${path}/permissions`, async function (request, response) {
 
 	// Check that the user has the permission "demo.typescript=read" or the permission "demo.typescript=read('Report 1')" to receive the permissions
 	if (!PermissionsManager.hasAnyPermissions('Roxane', permissions, [{ feature: myServiceId, action: 'read' }, { feature: myServiceId, action: 'read', values: ['Report 1'] }])) {
-		response.status(403).send({ message: `Unauthorized: you need to have the permission "${myServiceId}=read" or the permission "${myServiceId}=read('Report 1)"` })
+		response.status(403).send({
+			message: `Unauthorized: you need to have the permission "${myServiceId}=read" or the permission "${myServiceId}=read('Report 1)"`
+		})
 	}
 
 	response.status(200).send(permissions)
 })
 ```
-
-## Service.Constants
-
-Platform 6 constants.
-
-- `SERVICE_SCRIPTS_ID`: Platform 6 Scripts service's id
-
