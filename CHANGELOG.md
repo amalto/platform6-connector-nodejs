@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- __BREAKING CHANGE__: the whole service deployment process API has been refactored for better asynchronous handling (see [the documentation of the new API](./API.md)).
+- The `BusConnection`, `Constants`, `PermissionManager` objects are now directly exported from the package.
+### Added
+- The identifier of the service's instance is retrieviable as a property.
 
 ## [1.0.0] - 2018-09-07
 ### Changed
