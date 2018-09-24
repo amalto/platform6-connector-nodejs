@@ -51,4 +51,4 @@ Please refer to [changelog](./CHANGELOG.md) to see the descriptions of each rele
 
 ## License
 
-MIT © [Amalto Technologies](https://www.amalto.com/)
+MIT © [Platform 6](https://www.platform6.io/)
