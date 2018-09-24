@@ -95,19 +95,20 @@ Nothing new.
 - Expose global constants.
 
 
-[Unreleased]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/HEAD..0.0.1-alpha.9
-[2.0.0]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v2.0.0..0.0.1-alpha.9
-[1.0.0]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v1.0.0..0.0.1-alpha.9
-[0.2.2]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.2.2..0.0.1-alpha.9
-[0.2.0]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.2.0..0.0.1-alpha.9
-[0.1.0]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.1.0..0.0.1-alpha.9
-[0.0.1-alpha.11]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.0.1-alpha.11..0.0.1-alpha.9
-[0.0.1-alpha.10]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/v0.0.1-alpha.10..0.0.1-alpha.9
-[0.0.1-alpha.9]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/0.0.1-alpha.9..0.0.1-alpha.8
-[0.0.1-alpha.8]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/0.0.1-alpha.8..0.0.1-alpha.7
-[0.0.1-alpha.7]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/0.0.1-alpha.7..0.0.1-alpha.6
-[0.0.1-alpha.6]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/0.0.1-alpha.6..0.0.1-alpha.5
-[0.0.1-alpha.5]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/0.0.1-alpha.5..0.0.1-alpha.4
-[0.0.1-alpha.4]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/0.0.1-alpha.4..0.0.1-alpha.3
-[0.0.1-alpha.3]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/0.0.1-alpha.3..0.0.1-alpha.2
-[0.0.1-alpha.2]: https://bitbucket.org/amalto/platform6-client-nodejs/branches/compare/0.0.1-alpha.2..0.0.1-alpha.1
+[Unreleased]: https://github.com/amalto/platform6-client-nodejs/compare/HEAD..v2.0.0
+[2.0.0]: https://github.com/amalto/platform6-client-nodejs/compare/v2.0.0..v1.0.0
+[1.0.0]: https://github.com/amalto/platform6-client-nodejs/compare/v1.0.0..v0.2.2
+[0.2.2]: https://github.com/amalto/platform6-client-nodejs/compare/v0.2.2..v0.2.1
+[0.2.1]: https://github.com/amalto/platform6-client-nodejs/compare/v0.2.1..v0.2.0
+[0.2.0]: https://github.com/amalto/platform6-client-nodejs/compare/v0.2.0..v0.1.0
+[0.1.0]: https://github.com/amalto/platform6-client-nodejs/compare/v0.1.0..v0.0.1-alpha.11
+[0.0.1-alpha.11]: https://github.com/amalto/platform6-client-nodejs/compare/v0.0.1-alpha.11..v0.0.1-alpha.10
+[0.0.1-alpha.10]: https://github.com/amalto/platform6-client-nodejs/compare/v0.0.1-alpha.10..0.0.1-alpha.9
+[0.0.1-alpha.9]: https://github.com/amalto/platform6-client-nodejs/compare/0.0.1-alpha.9..0.0.1-alpha.8
+[0.0.1-alpha.8]: https://github.com/amalto/platform6-client-nodejs/compare/0.0.1-alpha.8..0.0.1-alpha.7
+[0.0.1-alpha.7]: https://github.com/amalto/platform6-client-nodejs/compare/0.0.1-alpha.7..0.0.1-alpha.6
+[0.0.1-alpha.6]: https://github.com/amalto/platform6-client-nodejs/compare/0.0.1-alpha.6..0.0.1-alpha.5
+[0.0.1-alpha.5]: https://github.com/amalto/platform6-client-nodejs/compare/0.0.1-alpha.5..0.0.1-alpha.4
+[0.0.1-alpha.4]: https://github.com/amalto/platform6-client-nodejs/compare/0.0.1-alpha.4..0.0.1-alpha.3
+[0.0.1-alpha.3]: https://github.com/amalto/platform6-client-nodejs/compare/0.0.1-alpha.3..0.0.1-alpha.2
+[0.0.1-alpha.2]: https://github.com/amalto/platform6-client-nodejs/compare/0.0.1-alpha.2..0.0.1-alpha.1
