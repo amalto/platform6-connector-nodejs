@@ -1,6 +1,4 @@
 import { CommonMessage, Header, Attachment } from './messages/commonMessage'
-import { Constants } from './constants'
-import { v4 as uuid } from 'uuid'
 
 import Logger from './loggers/logger'
 
@@ -12,10 +10,10 @@ export type HeaderDefinition = [string, string | object]
 export type HeaderObject = Header | HeaderDefinition
 
 /**
- * Display in the console a common message.
+ * Display in the console a common message
  *
- * @param counterpartIdKey Receiver's id key.
- * @param commonMessage Common message to display.
+ * @param counterpartIdKey Receiver's id key
+ * @param commonMessage Common message to display
  */
 export function displayCommonMessage(counterpartIdKey: string, commonMessage: CommonMessage): void {
 	const currentIdKey = commonMessage.replyTo
@@ -25,10 +23,10 @@ export function displayCommonMessage(counterpartIdKey: string, commonMessage: Co
 }
 
 /**
- * Get the value of a common message's header by key.
+ * Get the value of a common message's header by key
  *
- * @param commonMessage Common message received.
- * @param key Header's key.
+ * @param commonMessage Common message received
+ * @param key Header's key
  */
 export function getHeaderValue(commonMessage: CommonMessage, key: string): string | object | null {
 	const header = CommonMessage
@@ -69,19 +67,20 @@ function stringify(value: string | object) {
 }
 
 /**
- * Create a common message.
+ * Create a common message
  *
- * @param senderId Sender's id.
- * @param receiverId Receiver's id.
- * @param headers Array of headers (each header's key must be unique).
- * @param attachments Array of attachments.
+ * @param destinationId Service receiver's identifier
+ * @param senderId Service sender's identifier
+ * @param headers Array of headers (each header's key must be unique)
+ * @param attachments Array of attachments
+ * @param messageId Common message's identifier
  */
-export function createCommonMessage(senderId: string, receiverId: string, headers: Header[], attachments: Attachment[]): CommonMessage {
+export function createCommonMessage(destinationId: string, senderId: string, headers: Header[], attachments: Attachment[], messageId: string): CommonMessage {
 	const keys = headers.map(h => h.key)
 	if (keys.some((key, index) => keys.indexOf(key) !== index))
 		throw new Error(`Unable to create a common message: some headers' keys are not unique.`)
 
-	const payload = { id: uuid(), destination: Constants.RECEIVER_ID_PREFIX + receiverId, replyTo: senderId, headers, attachments }
+	const payload = { id: messageId, destination: destinationId, replyTo: senderId, headers, attachments }
 	const errorMessage = CommonMessage.verify(payload)
 
 	if (errorMessage) throw new Error(`Unable to create a common message: ${errorMessage}`)
@@ -92,8 +91,8 @@ export function createCommonMessage(senderId: string, receiverId: string, header
 /**
  * Create a common message's header
  *
- * @param key The key of the header.
- * @param value The value of the header.
+ * @param key The key of the header
+ * @param value The value of the header
  */
 export function createHeader(key: string, value: string | object): Header {
 	const payload = {
@@ -109,10 +108,10 @@ export function createHeader(key: string, value: string | object): Header {
 }
 
 /**
- * Create a common message's attachment.
+ * Create a common message's attachment
  *
- * @param headers Array of headers.
- * @param data The value of the attachment.
+ * @param headers Array of headers
+ * @param data The value of the attachment
  */
 export function createAttachment(headers: Header[], data: string): Attachment {
 	const payload = { headers, data }

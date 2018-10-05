@@ -9,33 +9,33 @@ import Service from './service'
 import * as memoize from 'mem'
 
 export interface UserInterfaceProperties {
-	/** Visibility of the entry menu. */
+	/** Visibility of the entry menu */
 	visible: boolean
-	/** Icon's name of the entry menu. */
+	/** Icon's name of the entry menu */
 	iconName: string
-	/** Position of the entry in the menu. */
+	/** Position of the entry in the menu */
 	weight: number
-	/** Multi-language label for the entry menu (language: 'en-US', 'fr-FR'). */
+	/** Multi-language label for the entry menu (language: 'en-US', 'fr-FR') */
 	label: { [key: string]: string }
 }
 
 export interface Versions {
-	/** Semver version of the service server. */
+	/** Semver version of the service server */
 	server: string
-	/** Semver version of the service client. */
+	/** Semver version of the service client */
 	client: string
 }
 
 export interface DeployParameters {
-	/** Service's identifier. */
+	/** Service's identifier */
 	id: string
-	/** Path of the endpoint's URL to get the service's client script. */
+	/** Path of the endpoint's URL to get the service's client script */
 	path: string
-	/** Base path of the endpoint's URL to get the service's client script.  */
+	/** Base path of the endpoint's URL to get the service's client script  */
 	basePath: string
-	/** Semver version of all the service's components. */
+	/** Semver version of all the service's components */
 	versions: Versions | string
-	/** Properties of the service's entry menu. */
+	/** Properties of the service's entry menu */
 	ui: UserInterfaceProperties
 }
 
