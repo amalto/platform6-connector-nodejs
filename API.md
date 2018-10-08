@@ -150,7 +150,7 @@ deployService({ /* ... */ })
 
 ### Send a request to another service
 
-`function callService(parameters: CallServiceParameters): Promise<CommonMessage>`
+`function callService(parameters: CallServiceParameters, messageId?: string): Promise<CommonMessage>`
 
 __Argument__
 
@@ -173,11 +173,15 @@ interface CallServiceParameters {
 }
 ```
 
+`messageId`: the common message's identifier (null if it's a new exchange, the request message's identifier if not)
+
 __Result__
 
 The Platform 6 receiver service response.
 
 __Example__
+
+Send a request to the Scripts service and wait for an answer.
 
 ```typescript
 import { Constants, deployService } from '@amalto/platform6-client'
@@ -198,6 +202,48 @@ deployService({ /* ... */ })
 	})
 ```
 
+See an example of a reply to another service in the section below.
+
+### Listen to any other Platform 6 service
+
+`function async registerListener(itemAdded?: ItemEventListener<CommonMessage>, itemRemoved?: ItemEventListener<CommonMessage>): Promise<void>`
+
+__Arguments__
+
+```typescript
+/** The action performed when a message is added to the queue **/
+itemAdded (item: CommonMessage, member: Member, eventType: ItemEventType) => void
+
+/** The action performed when a message is removed to the queue **/
+itemAdded (item: CommonMessage, member: Member, eventType: ItemEventType) => void
+```
+
+__Result__
+
+No response is returned.
+
+__Example__
+
+In this example, the custom service is asked to return the time.
+
+```typescript
+import { deployService } from '@amalto/platform6-client'
+
+deployService({ /* ... */ })
+	.then((service: any) => {
+		const itemAdded = (item: any, member: any, type: any) => {
+			const date = new Date()
+
+			service.callService({
+				receiverId: item.replyTo.substr(4, item.replyTo.length - 1),
+				headers: [['time', `${date.getHours()}:${date.getMinutes()}`]]
+			}, item.id)
+		}
+
+		service.registerListener(itemAdded, () => {})
+	})
+```
+
 ## BusConnection
 
 Some methods to manage the common messages.
@@ -209,7 +255,7 @@ Some methods to manage the common messages.
 __Arguments__
 
 - `commonMessage`: the common message received
-- `key`: the header's key
+- `key`: the required header's key
 
 __Result__
 
@@ -230,7 +276,7 @@ deployService({ /* ... */ })
 		})
 
 		// Get the value from the service Platform 6 Scripts's response
-		const ids = BusConnection.getHeaderValue(scriptsResponse, Constants.SERVICE_SCRIPTS_ID, Constants.PLATFORM6_RESPONSE_VALUE)
+		const ids = BusConnection.getHeaderValue(scriptsResponse, Constants.PLATFORM6_RESPONSE_VALUE)
 	})
 ```
 

@@ -67,7 +67,7 @@ class Service {
 	 * @param itemAdded Action performed when a message is added to the queue
 	 * @param itemRemoved Action performed when a message is removed from the queue
 	 */
-	public async registerListener(itemAdded: ItemEventListener<CommonMessage>, itemRemoved: ItemEventListener<CommonMessage>) {
+	public async registerListener(itemAdded?: ItemEventListener<CommonMessage>, itemRemoved?: ItemEventListener<CommonMessage>): Promise<void> {
 		const queue = this.client.getQueue<CommonMessage>(Constants.RECEIVER_ID_PREFIX + this.id)
 		const listener = {} as ItemListener<CommonMessage>
 
