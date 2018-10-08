@@ -1,6 +1,7 @@
+import test from 'ava'
+
 const PermissionsManager = require('../src/permissionsManager')
 const Constants = require('./permissions')
-const test = require('ava')
 
 test('Check if the user has a super permission (he has)', t => {
 	t.is(PermissionsManager.checkIfUserIsSuperUser(Constants.PERMISSIONS_SET3), true)

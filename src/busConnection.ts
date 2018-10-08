@@ -48,6 +48,13 @@ export function parseAttachment(attachments: AttachmentObject[]) {
 		: createAttachment(attachment[0], stringify(attachment[1])))
 }
 
+/**
+ * Create an array of headers
+ *
+ * Note: headers can have the same key
+ *
+ * @param headers Headers objects
+ */
 export function parseHeaders(headers: HeaderObject[]) {
 	return headers.map(header => header instanceof Header
 		? header
