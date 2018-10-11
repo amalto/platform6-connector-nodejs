@@ -314,11 +314,12 @@ interface FormattedPermission {
 
 ### Get the permissions of a user
 
-`function getUserPermissions(request: any): Promise<InstancePermissions>`
+`function getUserPermissions(request: any, hostname = 'login.amalto.io'): Promise<InstancePermissions>`
 
 __Argument__
 
 - `request`: the user's HTTP request
+- `hostname`: the authentication hostname (by default it is `'login.amalto.io'` )
 
 __Example__
 
@@ -328,6 +329,11 @@ import { PermissionsManager } from '@amalto/platform6-client'
 app.get(`${path}/permissions`, async function (request, response) {
 	// Retrieve the permissions of the user doing the request
 	const permissions = await PermissionsManager.getUserPermissions(request)
+
+	// Check that the permissions are correctly retrieved
+	if (permissions.hasOwnProperty('error')) {
+		response.status(401).send({ message: "Unauthorized: you need to have a valid access token to get your permissions." })
+	}
 
 	response.status(200).send(permissions)
 })
@@ -348,12 +354,15 @@ __Example__
 ```typescript
 import { PermissionsManager } from '@amalto/platform6-client'
 
+// The instance's name can be retrieved from the service's instance (see the Service section)
+const MY_INSTANCE = 'myInstanceName'
+
 app.get(`${path}/permissions`, async function (request, response) {
 	// Retrieve the permissions of the user doing the request
 	const permissions = await PermissionsManager.getUserPermissions(request)
 
-	// Check that the user has the permission "demo.typescript=read" to receive the permissions
-	if (!PermissionsManager.hasPermissions('Roxane', permissions, [{ feature: myServiceId, action: 'read' }])) {
+	// Check that the user has the permission "demo.typescript=read" on the MY_INSTANCE instance to receive the permissions
+	if (!PermissionsManager.hasPermissions(MY_INSTANCE, permissions, [{ feature: myServiceId, action: 'read' }])) {
 		response.status(403).send({ message: `Unauthorized: you need to have the permission "${myServiceId}=read"` })
 	}
 
@@ -376,12 +385,15 @@ __Example__
 ```typescript
 import { PermissionsManager } from '@amalto/platform6-client'
 
+// The instance's name can be retrieved from the service's instance (see the Service section)
+const MY_INSTANCE = 'myInstanceName'
+
 app.get(`${path}/permissions`, async function (request, response) {
 	// Retrieve the permissions of the user doing the request
 	const permissions = await PermissionsManager.getUserPermissions(request)
 
-	// Check that the user has the permission "demo.typescript=read" or the permission "demo.typescript=read('Report 1')" to receive the permissions
-	if (!PermissionsManager.hasAnyPermissions('Roxane', permissions, [{ feature: myServiceId, action: 'read' }, { feature: myServiceId, action: 'read', values: ['Report 1'] }])) {
+	// Check that the user has on the MY_INSTANCE instance the permission "demo.typescript=read" or the permission "demo.typescript=read('Report 1')" to receive the permissions
+	if (!PermissionsManager.hasAnyPermissions(MY_INSTANCE, permissions, [{ feature: myServiceId, action: 'read' }, { feature: myServiceId, action: 'read', values: ['Report 1'] }])) {
 		response.status(403).send({
 			message: `Unauthorized: you need to have the permission "${myServiceId}=read" or the permission "${myServiceId}=read('Report 1)"`
 		})

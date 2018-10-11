@@ -131,12 +131,12 @@ export function hasAnyPermissions(
  *
  * @param request the request containing the authentication token
  */
-export function getUserPermissions(request: any): Promise<InstancePermissions> {
+export function getUserPermissions(request: any, hostname = 'login.amalto.io'): Promise<InstancePermissions> {
 	// Get the authorization token to inject it in the following request
 	const authorization = request.get('Authorization')
 
 	const options = {
-		hostname: 'devlogin.amalto.io',
+		hostname,
 		path: '/apis/v2/scopestree',
 		headers: { 'Authorization': authorization }
 	}
