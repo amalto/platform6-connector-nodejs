@@ -1,31 +1,29 @@
-# Platform 6 Node.js Client
+# Platform 6 Node.js Connector
 
-⚠️ ⚠️ ⚠️ This project has been archived and moved into [amalto/platform6-connector-nodejs](https://github.com/amalto/platform6-connector-nodejs).
+> [Platform 6](https://documentation.amalto.com/platform6/master/) Node.js connector
 
-> [Platform 6](https://documentation.amalto.com/platform6/master/) Node.js client
+[![Build Status](https://api.travis-ci.org/amalto/platform6-connector-nodejs.svg?brancgh=master)](https://travis-ci.org/amalto/platform6-connector-nodejs)
+[![Coverage Status](https://coveralls.io/repos/github/amalto/platform6-connector-nodejs/badge.svg?branch=master)](https://coveralls.io/github/amalto/platform6-connector-nodejs?branch=master)
 
-[![Build Status](https://api.travis-ci.org/amalto/platform6-client-nodejs.svg?brancgh=master)](https://travis-ci.org/amalto/platform6-client-nodejs)
-[![Coverage Status](https://coveralls.io/repos/github/amalto/platform6-client-nodejs/badge.svg?branch=master)](https://coveralls.io/github/amalto/platform6-client-nodejs?branch=master)
-
-This repository is a [Platform 6 client](https://documentation.amalto.com/platform6/master/developer-guide/platform6-clients/) aiming to help the development a [service](https://documentation.amalto.com/platform6/master/developer-guide/getting-started/) in JavaScript.
+This repository is a [Platform 6 connector](https://documentation.amalto.com/platform6/dev/develop-app/custom-service/platform6-cmb-connectors/) aiming to help the development a [service](https://documentation.amalto.com/platform6/master/developer-guide/getting-started/) in JavaScript.
 It exposes, among others, methods to facilitate the communication with a Platform 6 instance.
 
 ## Requirements
 
-Platform 6 client depends on:
+Platform 6 connector depends on:
 
 - [Node.js](https://nodejs.org/en/) (version `>= 4`),
 - [Platform 6](https://documentation.amalto.com/platform6/master/user-guide/getting-started/) (version `5.17.0` and higher)
 
-## Installing the client
+## Installing the connector
 
-The following command installs Platform 6 client as a Node.js dependency:
+The following command installs Platform 6 connector as a Node.js dependency:
 
 ```console
-$ npm install --save @amalto/platform6-client
+$ npm install --save @platform6/platform6-connector
 ```
 
-## Using the client
+## Using the connector
 
 ### Demo project
 
@@ -45,7 +43,7 @@ To filter the logs, please refer to [the documentation of debug](https://github.
 
 ### API
 
-You will find the documentation of the methods exposed in the section [API](https://github.com/amalto/platform6-client-nodejs/blob/master/API.md).
+You will find the documentation of the methods exposed in the section [API](https://github.com/amalto/platform6-connector-nodejs/blob/master/API.md).
 
 ## Release notes
 

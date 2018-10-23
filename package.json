@@ -1,18 +1,18 @@
 {
-    "name": "@amalto/platform6-client",
+    "name": "@platform6/platform6-connector",
     "version": "2.1.2",
-    "description": "Platform 6 Node.js client",
-    "homepage": "https://github.com/amalto/platform6-client-nodejs",
-    "bugs": "https://github.com/amalto/platform6-client-nodejs/issues",
+    "description": "Platform 6 Node.js connector",
+    "homepage": "https://github.com/amalto/platform6-connector-nodejs",
+    "bugs": "https://github.com/amalto/platform6-connector-nodejs/issues",
     "license": "MIT",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
-    "repository": "github.com:amalto/platform6-client-nodejs.git",
+    "repository": "github.com:amalto/platform6-connector-nodejs.git",
     "keywords": [
         "amalto",
         "platform6"
     ],
-    "author": "Amalto Technologies",
+    "author": "Platform 6",
     "contributors": [
         {
             "name": "Roxane Macé",

@@ -39,7 +39,7 @@ interface Attachment { headers: Header[], bytes: string }
 Platform 6 available constants.
 
 ```typescript
-import { Constants } from '@amalto/platform6-client'
+import { Constants } from '@platform6/platform6-connector'
 
 // Platform 6 Scripts service's id
 Constants.SERVICE_SCRIPTS_ID
@@ -94,7 +94,7 @@ The [service's instance](#service).
 __Example__
 
 ```typescript
-import { deployService } from '@amalto/platform6-client'
+import { deployService } from '@platform6/platform6-connector'
 
 const myServiceId = 'demo.typescript'
 
@@ -123,7 +123,7 @@ deployService({
 __Example__
 
 ```typescript
-import { deployService } from '@amalto/platform6-client'
+import { deployService } from '@platform6/platform6-connector'
 
 deployService({ /* ... */ })
 	.then((service: any) => {
@@ -142,7 +142,7 @@ The Platform 6 Manager service response.
 __Example__
 
 ```typescript
-import { deployService } from '@amalto/platform6-client'
+import { deployService } from '@platform6/platform6-connector'
 
 deployService({ /* ... */ })
 	.then((service: any) => service.undeployService())
@@ -184,7 +184,7 @@ __Example__
 Send a request to the Scripts service and wait for an answer.
 
 ```typescript
-import { Constants, deployService } from '@amalto/platform6-client'
+import { Constants, deployService } from '@platform6/platform6-connector'
 
 deployService({ /* ... */ })
 	.then((service: any) => {
@@ -227,7 +227,7 @@ __Example__
 In this example, the custom service is asked to return the time.
 
 ```typescript
-import { deployService } from '@amalto/platform6-client'
+import { deployService } from '@platform6/platform6-connector'
 
 deployService({ /* ... */ })
 	.then((service: any) => {
@@ -264,7 +264,7 @@ The value of the requested header's key.
 __Example__
 
 ```typescript
-import { BusConnection, Constants, deployService } from '@amalto/platform6-client'
+import { BusConnection, Constants, deployService } from '@platform6/platform6-connector'
 
 deployService({ /* ... */ })
 	.then((service: any) => {
@@ -324,7 +324,7 @@ __Argument__
 __Example__
 
 ```typescript
-import { PermissionsManager } from '@amalto/platform6-client'
+import { PermissionsManager } from '@platform6/platform6-connector'
 
 app.get(`${path}/permissions`, async function (request, response) {
 	// Retrieve the permissions of the user doing the request
@@ -352,7 +352,7 @@ __Arguments__
 __Example__
 
 ```typescript
-import { PermissionsManager } from '@amalto/platform6-client'
+import { PermissionsManager } from '@platform6/platform6-connector'
 
 // The instance's name can be retrieved from the service's instance (see the Service section)
 const MY_INSTANCE = 'myInstanceName'
@@ -383,7 +383,7 @@ __Arguments__
 __Example__
 
 ```typescript
-import { PermissionsManager } from '@amalto/platform6-client'
+import { PermissionsManager } from '@platform6/platform6-connector'
 
 // The instance's name can be retrieved from the service's instance (see the Service section)
 const MY_INSTANCE = 'myInstanceName'
