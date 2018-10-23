@@ -1,5 +1,7 @@
 # Platform 6 Node.js Client
 
+⚠️ ⚠️ ⚠️ This project has been archived and moved into [amalto/platform6-connector-nodejs](https://github.com/amalto/platform6-connector-nodejs).
+
 > [Platform 6](https://documentation.amalto.com/platform6/master/) Node.js client
 
 [![Build Status](https://api.travis-ci.org/amalto/platform6-client-nodejs.svg?brancgh=master)](https://travis-ci.org/amalto/platform6-client-nodejs)
