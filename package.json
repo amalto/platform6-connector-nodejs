@@ -1,6 +1,6 @@
 {
     "name": "@platform6/platform6-connector",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "Platform 6 Node.js connector",
     "homepage": "https://github.com/amalto/platform6-connector-nodejs",
     "bugs": "https://github.com/amalto/platform6-connector-nodejs/issues",
