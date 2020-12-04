@@ -30,11 +30,11 @@
     },
     "dependencies": {
         "debug": "^3.1.0",
-        "express": "^4.16.3",
-        "hazelcast-client": "^0.9.0",
+        "express": "^4.17.1",
+        "hazelcast-client": "^0.10.0",
         "mem": "^4.0.0",
         "protobufjs": "^6.10.1",
-        "uuid": "^3.2.1"
+        "uuid": "^3.4.0"
     },
     "devDependencies": {
         "@types/bluebird": "^3.5.20",
