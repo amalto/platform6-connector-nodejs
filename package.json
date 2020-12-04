@@ -32,7 +32,7 @@
         "debug": "^3.1.0",
         "express": "^4.17.1",
         "hazelcast-client": "^0.10.0",
-        "mem": "^4.0.0",
+        "mem": "^4.3.0",
         "protobufjs": "^6.8.6",
         "uuid": "^3.4.0"
     },
