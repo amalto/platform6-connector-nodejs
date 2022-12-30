@@ -43,13 +43,13 @@
         "@types/mem": "^1.1.2",
         "@types/node": "^8.10.2",
         "@types/uuid": "^3.4.3",
-        "ava": "^0.25.0",
+        "ava": "^5.1.0",
         "nyc": "^13.1.0",
-        "ts-loader": "^3.5.0",
+        "ts-loader": "^9.4.2",
         "ts-node": "^5.0.1",
         "typescript": "^2.8.1",
         "uglifyjs-webpack-plugin": "^1.2.4",
-        "webpack": "^3.11.0",
+        "webpack": "^5.75.0",
         "webpack-node-externals": "^1.7.2"
     },
     "engines": {
